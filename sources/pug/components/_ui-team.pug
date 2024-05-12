@@ -1,0 +1,40 @@
+//- team classic
+mixin team-classic(obj)
+	.team-classic
+		.team-classic-figure
+			+jpg(obj.img)
+			ul.team-classic-soc-list
+				li: a(href='#').icon.icon-md.fa-facebook
+				li: a(href='#').icon.icon-md.fa-instagram
+				li: a(href='#').icon.icon-md.fa-twitter
+		.team-classic-caption
+			h4: a(href='team-member.html').team-name=obj.name
+			p=obj.text
+			
+//- team modern
+mixin team-modern(obj)
+	.team-modern(class=obj.classMod)
+		.team-modern-figure
+			if(obj.classMod == 'team-modern-no-img')
+				+png('team-modern-no-img-375x290')
+			else
+				+jpg(obj.img)
+			ul.team-modern-soc-list
+				li: a(href='#').icon.icon-lg.fa-facebook
+				li: a(href='#').icon.icon-lg.fa-instagram
+				li: a(href='#').icon.icon-lg.fa-twitter
+		.team-modern-caption
+			h4: a(href='#').team-name=obj.name
+			p=obj.text
+			
+//- team minimal
+mixin team-minimal(obj)
+	.team-minimal
+		.team-minimal-figure
+			+jpg(obj.img)
+			ul.team-minimal-soc-list
+				li: a(href='#').button.button-sm.button-secondary book now
+
+		.team-minimal-caption
+			h4.text-uppercase: a(href='#').team-name=obj.name
+			h6.text-primary.text-uppercase=obj.text

@@ -1,0 +1,125 @@
+/*
+* Text styling
+*/
+
+// Text styles
+.text-italic {
+	font-style: italic;
+}
+
+.text-normal {
+	font-style: normal;
+}
+
+// Text decoration
+.text-underline {
+	text-decoration: underline;
+}
+
+.text-strike {
+	text-decoration: line-through;
+}
+
+// Text weight
+.fw-thin {
+	font-weight: 100;
+}
+
+.fw-light {
+	font-weight: 300;
+}
+
+.fw-regular {
+	font-weight: 400;
+}
+
+
+.fw-medium {
+	font-weight: 500;
+}
+
+.fw-sbold {
+	font-weight: 600;
+}
+
+.fw-bold {
+	font-weight: 700;
+}
+
+.fw-ubold {
+	font-weight: 900;
+}
+
+// Text spacing
+.text-spacing-0 {
+	letter-spacing: 0;
+}
+
+.text-opacity-80 {
+	opacity: .8;
+}
+
+.text-primary {
+	color: $primary !important;
+}
+.text-secondary {
+	color: $secondary;
+}
+
+.text-gradient-1 {
+	color: $secondary-2;
+}
+
+.text-gradient-2 {
+	color: $pink-color;
+}
+
+.text-gradient-3 {
+	color: $secondary;
+}
+
+.text-gradient-4 {
+	color: $green-color;
+}
+@supports (-webkit-background-clip: text) {
+	.text-gradient-1 {
+		background: $gradient-1;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.text-gradient-2 {
+		background: $gradient-2;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.text-gradient-3 {
+		background: $gradient-3;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.text-gradient-4 {
+		background: $gradient-4;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}
+
+@font-face {
+	font-family: 'TuesdayNigrh';
+	src: url('../../fonts/TuesdayNight-Regular.otf');
+}
+@font-face {
+	font-family: 'Henrik';
+	src: url('../../fonts/Henrik-Regular.otf');
+	src: url('../../fonts/Henrik-Regular.woff') format('woff');
+}
+.text-accent-2 {
+	font-family: 'TuesdayNigrh';
+}
+.text-accent-3 {
+	font-weight: 900;
+}
+
+.body-font-size{
+	font-size: 14px;
+}

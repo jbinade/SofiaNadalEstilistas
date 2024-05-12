@@ -1,0 +1,62 @@
+/*
+*
+* Counter
+*/
+
+//
+// Counter Classic
+//
+.counter-classic {
+	text-align: center;
+}
+
+.counter-classic-main {
+	font-family: $font-family-sec;
+	font-size: 40px;
+	line-height: 1;
+	font-weight: 100;
+	color: inherit;
+	white-space: nowrap;
+
+	> * {
+		display: inline-block;
+		vertical-align: bottom;
+	}
+
+	.small {
+		position: relative;
+		top: -.05em;
+		font-size: .66em;
+		line-height: 1;
+	}
+}
+
+* + .counter-classic-title { margin-top: 10px; }
+
+@include media-breakpoint-up(md) {
+	.counter-classic-main {
+		font-size: 60px;
+	}
+
+	* + .counter-classic-title { margin-top: 15px; }
+}
+
+.counter-classic-title {
+	font-size: 14px;
+	letter-spacing: .05em;
+	font-weight: 500;
+	text-transform: uppercase;
+	color: rgba($white,.8);	
+}
+
+@include media-breakpoint-up(lg) {
+	.counter-classic-main {
+		font-size: 80px;
+	}
+}
+@include media-breakpoint-up(xl) {
+	.counter-classic-main {
+		font-size: 110px;
+	}
+}
+ 

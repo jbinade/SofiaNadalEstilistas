@@ -1,0 +1,240 @@
+/*
+* Offsets
+*/
+
+
+
+
+// Elements offset
+* + p {
+	margin-top: 15px;
+}
+
+// Headings
+
+// Headings + Paragraph
+h2 + p,
+.heading-2 + p {
+	margin-top: 18px;
+}
+
+// Paragraph + Headings
+p + h2,
+p + .heading-2 {
+	margin-top: 15px;
+}
+
+// Tags + Tags
+p + p {
+	margin-top: 19px;
+}
+
+img + p {
+	margin-top: 15px;
+}
+
+h3 + img {
+	margin-top: 42px;
+}
+h3 + p {
+	margin-top: 28px;
+}
+
+p + .button {
+	margin-top: 46px;
+}
+
+h2 + .offset-top-1 {
+	margin-top: 50px;
+	// Large ≥992px
+	@include media-breakpoint-up(lg) {
+		margin-top: 92px;
+	}
+}
+
+h2 + .offset-top-2 {
+	margin-top: 30px;
+	// Large ≥992px
+	@include media-breakpoint-up(lg) {
+		margin-top: 65px;
+	}
+}
+
+h2 + .offset-top-3 {
+	margin-top: 0;
+	// Large ≥992px
+	@include media-breakpoint-up(lg) {
+		margin-top: 60px;
+	}
+}
+
+// Classes
+* + .row {
+	margin-top: 30px;
+}
+
+.thin-title + * {
+	margin-top: 30px;
+}
+
+* + .big {
+	margin-top: 20px;
+}
+
+* + .text-block {
+	margin-top: 30px;
+}
+
+* + .button {
+	margin-top: 30px;
+}
+h3 + .button {
+	margin-top: 37px;
+}
+
+* + .social-list {
+	margin-top: 30px;
+}
+
+* + .row {
+	margin-top: 60px;
+}
+
+// Classes + Tags
+.row + h3,
+.row + .heading-3 {
+	margin-top: 80px;
+}
+
+h3 + .rd-form {
+	margin-top: 50px;
+}
+
+.big-text + h5 {
+	margin-top: 40px;
+}
+
+h2 + .small-text {
+	margin-top: 20px;
+	// Large ≥992px
+	@include media-breakpoint-up(lg) {
+		margin-top: 30px;
+	}
+
+}
+
+h2 + .p1 {
+	margin-top: 32px;
+}
+
+
+// Classes + Classes
+.container + .container {
+	margin-top: 35px;
+}
+
+.row + .row {
+	margin-top: 35px;
+}
+
+.form-wrap-outer + .form-wrap-outer {
+	margin-top: 20px;
+	// Extra large ≥1200px
+	@include media-breakpoint-up(xl) {
+		margin-top: 0;
+	}
+
+}
+
+// Media offsets
+@include media-breakpoint-up(xl) {
+
+	.container + .container {
+		margin-top: 60px;
+	}
+	.row + .row {
+		margin-top: 78px;
+	}
+}
+
+// Range spacing
+.row-0 {
+	@include grid-offset(0px);
+}
+
+.row-15 {
+	@include grid-offset(15px);
+}
+
+.row-20 {
+	@include grid-offset(20px);
+}
+
+.row-30 {
+	@include grid-offset(30px);
+}
+
+.row-40 {
+	@include grid-offset(40px);
+}
+
+
+.row-50 {
+	@include grid-offset(50px);
+}
+
+.row-60 {
+	@include grid-offset(60px);
+}
+
+.row-70 {
+	@include grid-offset(70px);
+}
+
+.row-85 {
+	@include grid-offset(85px);
+}
+
+@include media-breakpoint-up(lg) {
+	.row-md-30 {
+		@include grid-offset(30px);
+	}
+}
+
+h3 + .group-xl {
+	margin-top: 40px;
+}
+
+.form-wrap + .row{
+	margin-top: 30px;
+}
+* + .text-with-divider {
+	margin-top: 30px;
+}
+.text-with-divider + * {
+	margin-top: 40px;
+	// Large ≥992px
+	@include media-breakpoint-up(lg) {
+		margin-top: 54px;
+	}
+}
+
+* + .slick-slider {
+
+	// Large ≥992px
+	@include media-breakpoint-up(lg) {
+		margin-top: 40px;
+	}
+}
+
+* + .owl-carousel {
+	margin-top: 40px;
+	
+	// Large ≥992px
+	@include media-breakpoint-up(lg) {
+		margin-top: 60px;
+	}
+}
+* + .tabs-custom {
+	margin-top: 50px;
+}

@@ -1,0 +1,65 @@
+/*
+* Quotes
+*/
+
+//
+// Table of Contents: 
+//
+// Quote primary
+//
+
+//
+// Quote primary
+//
+.quote-primary {
+}
+
+.quote-primary-mark {
+	position: relative;
+	top: 6px;
+	display: block;
+	width: 37px;
+	height: 27px;
+	fill: $primary;
+	flex-shrink: 0;
+}
+
+.quote-primary-body {
+	position: relative;
+
+	
+}
+
+.quote-primary-text {
+	font-style: italic;
+	font-size: 18px;
+	letter-spacing: 0.08em;
+}
+
+.quote-primary-cite {
+	font-weight: 400;
+	font-size: 24px;
+}
+* + .quote-primary-cite {
+	margin-top: 0;
+	margin-left: 15px;
+}
+
+.quote-primary-footer {
+
+	display: flex;
+	align-items: center;
+	.bg-dot {
+		max-width: 250px;
+		flex-basis: 50%;
+		height: 50px;
+	}
+}
+
+* + .quote-primary {
+	margin-top: 30px;
+}
+
+* + .quote-primary-footer {
+	margin-top: 10px;
+}

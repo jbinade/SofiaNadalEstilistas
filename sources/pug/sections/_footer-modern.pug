@@ -1,0 +1,46 @@
+footer.section.footer-modern.context-dark
+	.google-map-container( data-center='9870 St Vincent Place, Glasgow, DC 45 Fr 45.', data-styles='[{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]'  data-zoom='14') 
+		.google-map
+		ul.google-map-markers
+			li( data-location='9870 St Vincent Place, Glasgow, DC 45 Fr 45.', data-description='9870 St Vincent Place, Glasgow', data-icon='images/gmap_marker-2.png', data-icon-active='images/gmap_marker-2.png' )
+	.container
+		.row.justify-content-lg-end
+			.col-lg-7
+				.section-md
+					.row.row-50
+						.col-md-3.col-xl-2.order-lg-2.text-lg-center.wow-outer
+							.wow.slideInLeft
+							h5.footer-title share
+
+							ul.social-list
+								li: a(href='#').icon.icon-sm.icon-circle.icon-circle-md.icon-bg-white.fa-facebook
+								li: a(href='#').icon.icon-sm.icon-circle.icon-circle-md.icon-bg-white.fa-instagram
+								li: a(href='#').icon.icon-sm.icon-circle.icon-circle-md.icon-bg-white.fa-twitter
+						.col-md-9.col-xl-10.order-lg-1.wow-outer
+							.wow.slideInRight
+								h5.footer-title Our Location
+								p.big 51 Francis Street, Darlinghurst NSW 2010, United States
+									br
+									span.text-primary Ph.
+									a(href='tel:#') +2545-8546-444555
+								
+								// RD Mailform
+								form.rd-mailform.text-start.rd-form-inline(data-form-output="form-output-global", data-form-type='contact', method='post', action='bat/rd-mailform.php')
+		
+									.form-wrap
+										label.form-label(for="subscribe-email") E-mail
+										input#subscribe-email.form-input(type="email" name="email" data-constraints="@Email @Required")
+		
+									.form-button.group-sm.text-center.text-lg-start
+										button(type="submit").button.button-lg.button-gradient subscribe
+				
+								p.rights
+									span &copy;&nbsp; 
+									span.copyright-year
+									span &nbsp;
+									span= logo.name
+									span .&nbsp;
+									span All Rights Reserved.
+									
+									span &nbsp;
+									a( href='privacy-policy.html' ) Privacy Policy

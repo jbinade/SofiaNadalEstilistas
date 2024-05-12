@@ -1,0 +1,16 @@
+mixin box-icon-classic(obj)
+	.box-icon-classic
+		.box-icon-inner(class=obj.classMod)
+			span.icon-xl-2(class=obj.icon)
+		.box-icon-caption
+			h4.text-uppercase: a(href=obj.link ? obj.link : '#')=obj.title
+			block
+				
+
+mixin box-icon-modern(obj)
+	.box-icon-modern(class=obj.boxMod)
+		.box-icon-inner(class=obj.classMod)
+			span.icon-xl(class=obj.icon)
+		.box-icon-caption
+			h4: a(href='#')=obj.title
+			block

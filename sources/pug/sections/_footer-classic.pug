@@ -1,0 +1,49 @@
+footer.section.footer-classic.context-dark
+	.container
+		.row.row-50
+			.col-lg-8.order-lg-2.ps-xl-5.wow-outer
+				.wow.slideInRight
+					.row.row-50
+						.col-12
+							h5.footer-title Subscribe & Stay Updated
+							// RD Mailform
+							form.rd-mailform.text-start.rd-form-inline(data-form-output="form-output-global", data-form-type='contact', method='post', action='bat/rd-mailform.php')
+								
+								.form-wrap
+									label.form-label(for="subscribe-email") E-mail
+									input#subscribe-email.form-input(type="email" name="email" data-constraints="@Email @Required")
+									
+								.form-button.group-sm.text-center.text-lg-start
+									button(type="submit").button.button-lg.button-gradient subscribe
+						.col-md-6
+							h5.footer-title Date and Location
+							ul.list-contact-info
+								li
+									span.icon.mdi.mdi-map-marker.icon-md.icon-secondary
+									span.list-item-text
+										a(href='#')
+											span.text-primary July 05-09, 2018
+											br
+											| 51 Francis Street, Darlinghurst NSW 2010, United States
+								li
+									span.icon.mdi.mdi-phone.icon-md.icon-secondary
+									span.list-item-text: a(href='tel:#') 1-800-123-1234
+										
+						.col-md-6
+							h5.footer-title Get Social
+							p.big Follow us to stay connected and receive instant updates.
+							ul.social-list
+								li: a(href='#').icon.icon-sm.icon-circle.icon-circle-md.icon-bg-white.fa-facebook
+								li: a(href='#').icon.icon-sm.icon-circle.icon-circle-md.icon-bg-white.fa-instagram
+								li: a(href='#').icon.icon-sm.icon-circle.icon-circle-md.icon-bg-white.fa-twitter
+								li: a(href='#').icon.icon-sm.icon-circle.icon-circle-md.icon-bg-white.fa-facebook 
+			.col-lg-4.order-lg-1.pe-xl-5.wow-outer
+				.wow.slideInLeft
+					.row.row-30
+						.col-12
+							a(href='index.html')
+								+png( logo.inverse.normal )( srcset='images/'+ logo.inverse.retina +'.png 2x' )
+						.col-12
+							p Eventy is an annual web design & development event gathering widely known industry experts from all over the world. Take a part in our conference and extend your IT knowledge today!
+							.footer-divider
+							+rights

@@ -1,0 +1,319 @@
+/*
+* Backgrounds
+*/
+
+.context-dark {
+	@extend %context-dark;
+}
+
+%context-dark {
+	// Logo
+	.brand {
+		.brand-logo-dark {
+			display: none;
+		}
+
+		.brand-logo-light {
+			display: block;
+		}
+	}
+	
+	.box-icon-caption {
+		p{
+			color: rgba($white, .8);
+		}
+	}
+	.decorate-triangle:before {
+		border-color: transparent transparent rgba($white, .08) transparent;
+	}
+	.decorate-circle:before, .decorate-rectangle:before {
+		background: rgba($white, .08);
+	}
+	
+	.team-classic-caption, .team-modern-caption {
+		p {
+			color: rgba($gray-800, .8);
+		}
+		h4 a{
+			color: $gray-800;
+			&:hover {
+				color: $primary;
+			}
+		}
+	}
+	.countdown-gradient {
+		.countdown-period{
+			color: rgba($white, .8);
+		}
+	}
+	.countdown {
+		.countdown-section + .countdown-section {
+			&::before,
+			&::after {
+				background: rgba($white, .2);
+			}
+		}
+	}
+
+	.box-pricing-modern {
+		color: $gray-800;
+		.pricing-modern-title {
+			color: $gray-800;
+		}
+	}
+	.text-secondary {
+		color: $secondary;
+	}
+	.google-map {
+		color: $gray-800;
+	}
+}
+
+%context-light {
+	// Logo
+	.brand {
+		.brand-logo-dark {
+			display: block;
+		}
+
+		.brand-logo-light {
+			display: none;
+		}
+	}
+}
+
+/*
+* Light Backgrounds
+*/
+.bg-default {
+	@include bg-behaviour($body-bg);
+}
+
+
+
+.bg-gray-1 {
+	@include bg-behaviour($gray-1);
+	
+	.rd-form-2 .form-input {
+		background-color: $gray-1;
+	}
+}
+
+.bg-gray-100 {
+	@include bg-behaviour($gray-100);
+}
+
+.bg-gray-300 {
+	@include bg-behaviour($gray-300);
+}
+
+.bg-gray-400 {
+	@include bg-behaviour($gray-400);
+}
+
+.bg-gray-1 {
+	@include bg-behaviour($gray-1);
+}
+
+/*
+* Dark Backgrounds
+*/
+
+.bg-secondary {
+	@extend %context-dark;
+	@include bg-behaviour($secondary);
+}
+
+.bg-gray-600 {
+	@extend %context-dark;
+	@include bg-behaviour($gray-600);
+}
+.bg-gray-700 {
+	@extend %context-dark;
+	@include bg-behaviour($gray-700);
+}
+.bg-gray-750 {
+	@extend %context-dark;
+	@include bg-behaviour($gray-750);
+}
+
+.bg-gray-800 {
+	@extend %context-dark;
+	@include bg-behaviour($gray-800);
+	
+}
+
+.bg-dark-filter {
+	position: relative;
+	> * {
+		position: relative;
+		z-index: 1;
+	}
+	&:before {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(180deg, rgba($black, 0) 0%, rgba($gray-800, 0.8) 100%);
+	}
+}
+
+.bg-accent-filter {
+	position: relative;
+	> * {
+		position: relative;
+		z-index: 1;
+	}
+	&:before {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(359.73deg, #3A092F 0.9%, rgba(60, 55, 79, 0.45) 107.43%);
+	}
+}
+
+/*
+* Accent Backgrounds
+*/
+.bg-primary {
+	@extend %context-dark;
+	& + & {
+		padding-top: 0;
+	}
+	background: $primary;
+}
+
+.bg-pink {
+	@extend %context-dark;
+	& + & {
+		padding-top: 0;
+	}
+	background: $pink-color;
+}
+
+.bg-secondary {
+	@extend %context-dark;
+	& + & {
+		padding-top: 0;
+	}
+	background: $secondary;
+}
+
+.bg-secondary-2 {
+	@extend %context-dark;
+	& + & {
+		padding-top: 0;
+	}
+	background: $secondary-2;
+}
+
+.bg-green{
+	@extend %context-dark;
+	& + & {
+		padding-top: 0;
+	}
+	background: $green-color;
+}
+
+/*
+* Background Image
+*/
+.bg-image {
+
+}
+
+[class*='bg-'] {
+	background-size: cover;
+	background-position: center center;
+}
+
+// Desktop only
+//
+html:not(.tablet):not(.mobile) {
+	.bg-fixed {
+		@include media-breakpoint-up(lg) {
+			background-attachment: fixed;
+		}
+	}
+}
+
+.bg-dot {
+	position: relative;
+	> * {
+		position: relative;
+		z-index: 1;
+	}
+	&:before {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: url("../images/bg-dot.png");
+		opacity: .2;
+		z-index: 0;
+	}
+}
+
+.bg-dots-light {
+	position: relative;
+	> * {
+		position: relative;
+		z-index: 1;
+	}
+	&:before {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: url("../images/bg-dot-light.png");
+		opacity: .04;
+		z-index: 0;
+	}
+}
+
+
+.bg-decorate {
+	position: relative;
+	overflow: hidden;
+	> * {
+		position: relative;
+		z-index: 2;
+	}
+	&:before {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: url("../images/bg-dot-light.png");
+		opacity: .04;
+		z-index: 0;
+	}
+	&:after {
+		position: absolute;
+		content: '';
+		top: 50%;
+		left: 0;
+		width: 100vw;
+		height: 100vw;
+		background: $gray-600;
+		transform: skewY(31deg);
+		z-index: 0;
+	}
+	&.bg-decorate-reverse {
+		&:after {
+			transform: skewY(-31deg);
+		}
+	}
+}
+

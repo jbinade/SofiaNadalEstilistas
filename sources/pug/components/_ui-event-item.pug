@@ -1,0 +1,38 @@
+mixin event-item-classic(obj)
+	.event-item-classic(class=obj.classMod)
+		.event-item-classic-figure
+			if(obj.eventColection)
+				ul.event-img-list
+					each item in obj.listImg
+						li: a(href='#'): +jpg(item.img)
+			else
+				a(href='#')
+					+jpg(obj.img)
+		.event-item-classic-caption
+			p.events-time=obj.eventTime
+			h4.event-item-classic-title: a(href='#')=obj.title
+			h5 by
+				=' '
+				if(obj.eventColection)
+					each item in obj.listSpeaker
+						a(href='#')=item.speaker
+						| ,
+						=' '
+				else
+					a(href='#')=obj.speaker
+					| ,
+					=' '
+				span=obj.speakerText
+			if(obj.eventText)
+				.event-item-classic-text
+					block
+					h5.event-item-location Location: 
+						=' '
+						span.location=obj.eventLocation
+						
+mixin event-item-modern(obj)
+	.event-item-modern(class=obj.classMod)
+		p.event-time=obj.time
+		h4.event-item-modern-title: a(href='#')=obj.title
+		.event-item-modern-text
+			block

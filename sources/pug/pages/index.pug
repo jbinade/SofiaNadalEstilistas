@@ -1,0 +1,451 @@
+extends  ../_skeleton
+
+//- Includes
+include ../components/_ui-pagination
+include ../components/_ui-box-icon
+include ../components/_ui-team
+include ../components/_ui-posts
+include ../components/_ui-gallery-item
+include ../components/_ui-event-item
+
+block variables
+	- var activeCategory = 'home'
+	- var pageName = 'Home'
+
+block page
+	// Page Header
+	include ../sections/_header-modern
+	//include ../sections/_header-sidebar
+
+	// Swiper
+	section.section.section-lg.section-main-bunner#home
+		.main-bunner-img(style='background-image: url("images/bg-bunner-2.jpg"); background-size: cover;')
+		.main-bunner-inner
+			.container
+				.row.row-50.justify-content-lg-center.align-items-lg-center
+					.col-lg-12
+						.bunner-content-modern.text-center
+							.big-text.decorative-line.wow.fadeInUp(data-wow-delay='.075s') Fashion & style
+							h5.wow.fadeInUp(data-wow-delay='1s')  Curl Hair Salon, established in 1999, is an oasis of beauty, hair <br class="d-none d-lg-block"> indulgence, and the synonym of stylish haircuts.
+
+	section.section.section-sm.context-dark.bg-secondary
+		.container
+			// RD Mailform
+			form.rd-form.rd-mailform.form-lg.form-1(data-form-output="form-output-global", data-form-type='subscribe', method='post', action='bat/rd-mailform.php')
+
+				.form-wrap-outer.wow.fadeIn
+					span.fw-regular.body-font-size  NAME
+					.form-wrap.form-wrap-main
+						input#form-1-destination.form-input(type='text' name='destination' data-constraints='@Required')
+						label.form-label(for='form-1-destination') Your name
+
+				.form-wrap-outer.wow.fadeIn(data-wow-delay='.025s')
+					span.fw-regular.body-font-size PHONE
+					.form-wrap.form-wrap-main
+						input#form-1-phone.form-input(type='text' name='phone' data-constraints='@Numeric')
+						label.form-label(for='form-1-phone') Your phone number
+
+				.form-wrap-outer.wow.fadeIn(data-wow-delay='.05s')
+					span.fw-regular.body-font-size DATE
+					.form-wrap.form-wrap-main
+						input#form-1-date.form-input(type='text' name='date' data-constraints='@Required' data-time-picker='date')
+						label.form-label(for='form-1-date') 12/20/22
+
+				.form-button.wow.fadeIn(data-wow-delay='.075s')
+					button.button.button-md.button-primary(type='submit') Make an appointment
+
+	section.section.section-lg.bg-default
+		.container
+			.row.justify-content-center.text-center
+				.col-md-9.col-lg-7.wow-outer
+					.wow.slideInDown
+						h2 Featured Offers
+						p We offer a complete range of hair services including haircuts & styling, coloring, eyebrow <br class="d-none d-lg-block"> and eyelash tinting, perming, hair straightening, and a lot more.
+			.row.row-40
+
+				.col-md-6.col-lg-4.wow-outer
+					.wow.fadeInUp
+						+team-minimal({
+							img: 'team-minimal-1-370x395',
+							name: 'haircuts',
+							text: 'Creating Your Image '
+						})
+
+				.col-md-6.col-lg-4.wow-outer
+					.wow.fadeInUp
+						+team-minimal({
+							img: 'team-minimal-2-370x395',
+							name: 'hairstyles',
+							text: 'Achieving the Best Look'
+						})
+
+				.col-md-6.col-lg-4.wow-outer
+					.wow.fadeInUp
+						+team-minimal({
+							img: 'team-minimal-3-370x395',
+							name: 'Coloring',
+							text: 'Any Colors You Can Imagine'
+						})
+
+
+	+parallax({
+		img: 'parallax-img-1.jpg',
+		innerClass: 'section-xl context-dark text-center'
+	})
+		.container: .row.justify-content-md-center: .col-md-10.wow-outer
+			.wow.fadeInUp
+				h4.text-secondary-2.text-uppercase only 3 days
+				h1 20% off Hairstyling Services
+				a.button.button-md.button-primary(href='#') view more
+
+
+	section.section.section-lg.section-lg-1.bg-default#gallery
+		.row.justify-content-center.text-center
+			.col-12.wow.slideInUp
+				h2 Our Portfolio
+				.small-text Check out the full portfolio of our works including haircuts, hair extensions, and<br class="d-none d-lg-block"> more. Everything you see here was performed by our stylists and hairdressers.
+		.row.row-30(data-isotope-group='gallery')
+
+			.col-12.col-sm-6.col-md-4.col-lg-3.wow-outer
+				.wow.slideInDown
+					+gallery-item-classic({
+						img: 'gallery-1-463x383',
+						imgOriginal: 'images/gallery-1-original.jpg'
+					})
+
+			.col-12.col-sm-6.col-md-4.col-lg-3.wow-outer
+				.wow.slideInDown
+					+gallery-item-classic({
+						img: 'gallery-2-463x383',
+						imgOriginal: 'images/gallery-2-original.jpg'
+					})
+
+			.col-12.col-sm-6.col-md-4.col-lg-3.wow-outer
+				.wow.slideInDown
+					+gallery-item-classic({
+						img: 'gallery-3-463x383',
+						imgOriginal: 'images/gallery-3-original.jpg'
+					})
+
+			.col-12.col-sm-6.col-md-4.col-lg-3.wow-outer
+				.wow.slideInDown
+					+gallery-item-classic({
+						img: 'gallery-12-463x383',
+						imgOriginal: 'images/gallery-4-original.jpg'
+					})
+
+			.col-12.col-sm-6.col-md-4.col-lg-3.wow-outer
+				.wow.slideInDown
+					+gallery-item-classic({
+						img: 'gallery-9-463x383',
+						imgOriginal: 'images/gallery-7-original.jpg'
+					})
+
+			.col-12.col-sm-6.col-md-4.col-lg-3.wow-outer
+				.wow.slideInDown
+					+gallery-item-classic({
+						img: 'gallery-13-463x383',
+						imgOriginal: 'images/gallery-13-original.jpg'
+					})
+
+			.col-12.col-sm-6.col-md-4.col-lg-3.wow-outer
+				.wow.slideInDown
+					+gallery-item-classic({
+						img: 'gallery-11-463x383',
+						imgOriginal: 'images/gallery-5-original.jpg'
+					})
+
+			.col-12.col-sm-6.col-md-4.col-lg-3.wow-outer
+				.wow.slideInDown
+					+gallery-item-classic({
+						img: 'gallery-8-463x383',
+						imgOriginal: 'images/gallery-8-original.jpg'
+					})
+
+
+	section.section.section-xl.section-xl-2.context-dark.bg-secondary#about
+		.container
+			.row.row-50.justify-content-lg-between
+				
+				.col-lg-6.text-center.text-lg-start
+					.wow.slideInLeft
+						.decorative-square
+							+jpg('home-3-1-483x400')
+				.col-lg-5.wow-outer.block-1.text-center.text-lg-start
+					.wow.slideInRight
+						h2 About Us
+						p.p1 Curl is one of the premier hair salons in Los Angeles, frequented not only by women but by men and kids as well.
+						p Our hair salon has earned an incredible reputation as our professional team of hairstylists continues to work wonders on clients’ hair and enhance their assets through our services.
+						a.button.button-md.button-primary(href='#') view more
+
+
+	section.section.section-lg.section-lg-3.bg-default.text-center
+		.container
+			.row.row-50
+
+				.col-md-6.col-lg-4.wow-outer
+					.wow.slideInRight
+						+box-icon-classic({
+							classMod: 'decorate-triangle decorate-color-primary-light',
+							icon: 'linearicons-woman icon-gray-800',
+							title: 'Friendly Team'
+						})
+							p.box-icon-caption-text Our staff is polite and courteous. We strive for excellence both in the quality of our services and interaction with you.
+
+				.col-md-6.col-lg-4.wow-outer
+					.wow.slideInRight
+						+box-icon-classic({
+							classMod: 'decorate-circle decorate-color-primary-light',
+							icon: 'linearicons-haircut icon-gray-800',
+							title: 'Best Equipment'
+						})
+							p.box-icon-caption-text We use the best equipment and products to deliver the highest level of haircut services to our clients.
+
+				.col-md-6.col-lg-4.wow-outer
+					.wow.slideInRight
+						+box-icon-classic({
+							classMod: 'decorate-rectangle decorate-color-primary-light',
+							icon: 'linearicons-color-sampler icon-gray-800',
+							title: 'Perfect Atmosphere'
+						})
+							p.box-icon-caption-text When you come to Curl , you are guaranteed to experience the warm and friendly atmosphere of our salon.
+
+
+	section.section.section-lg.section-lg-4.bg-gray-1#pricing
+		.container
+			h2.text-center.wow.slideInUp Pricing
+			.row.offset-top-1
+				.col-12.wow.slideInUp
+					#tabs-1.tabs-custom.tabs-horizontal.tabs-classic
+						ul.nav.nav-tabs.nav-tabs-classic
+							li.nav-item(role='presentation'): a.nav-link.active(href='#tabs-1-1' data-bs-toggle='tab') haircuts
+							li.nav-item(role='presentation'): a.nav-link(href='#tabs-1-2' data-bs-toggle='tab') hairstyling
+							li.nav-item(role='presentation'): a.nav-link(href='#tabs-1-3' data-bs-toggle='tab') coloring
+						.tab-content
+							div#tabs-1-1.tab-pane.fade.show.active
+								.box-event-modern
+									+event-item-modern({
+										classMod: 'event-active',
+										time: '$10.89',
+										title: 'Ladies’ Haircut'
+									})
+										p Curl provides a long list of salon services that will have women looking fabulous. Women can treat themselves to just a haircut or they can also choose from any of our expert services.
+
+									+event-item-modern({
+										time: '$9.89',
+										title: 'Men’s Haircut'
+									})
+										p A men’s haircut comes with a refreshing shampoo, stimulating scalp massage and an essential oil hot towel treatment.
+									+event-item-modern({
+										time: '$11.89',
+										title: 'Kids’ Haircut'
+									})
+										p A trip to our salon is always enjoyable for kids of all ages. While we service clients of all ages, the experience for children will make them feel special.
+									+event-item-modern({
+										time: '$8.89',
+										title: 'Senior Haircut'
+									})
+										p Our staff puts a great amount of pride in our senior haircut service as we believe people simply get better with age. Style and elegance can be yours at discounted senior prices.
+							div#tabs-1-2.tab-pane.fade
+								.box-event-modern
+									+event-item-modern({
+										classMod: 'event-active',
+										time: '$20.89',
+										title: 'Blowout'
+									})
+										p A full blowout service at Curl  includes two washes, one wash using clarifying shampoo, and the other is completed with a Blowout Shampoo and thermal protectant.
+									+event-item-modern({
+										time: '$16.89',
+										title: 'Curls'
+									})
+										p Enjoy a great shape with a customized curly cut, trim or shaping that's designed to bring out the best in your curls and express your individuality.
+									+event-item-modern({
+										time: '$15.89',
+										title: 'UpDo'
+									})
+										p An updo is a hairstyle that is completely pinned up. Whether it is a high ponytail with braiding included, a low side bun with twists, or anything in between, we can manage it.
+									+event-item-modern({
+										time: '$14.89',
+										title: 'Event HairStyling'
+									})
+										p If you have a special event coming up, then our event styling services for your hair are just what you need. Our team of stylists will make you look your best.
+							div#tabs-1-3.tab-pane.fade
+								.box-event-modern
+									+event-item-modern({
+										classMod: 'event-active',
+										time: '$10.89',
+										title: 'All-over Hair Color'
+									})
+										p All -Over Hair Color is a single-process hair color with scalp-to-ends application, also known as a “solid color” service. Price depends on hair length.
+									+event-item-modern({
+										time: '$19.89',
+										title: 'Inoa Color'
+									})
+										p The ultimate in ammonia-free color that is gentler and healthier on your scalp.  We have 22 patents for a color that is pure, vibrant and more beautiful than ever.
+									+event-item-modern({
+										time: '$11.89',
+										title: 'Retouch Lightener (Includes Toner)'
+									})
+										p This service is ideal for maintaining an all-over blonde look. Toner guarantees an excellent result. Price depends on hair length.
+									+event-item-modern({
+										time: '$16.89',
+										title: '6 Foil Highlight with Haircut & Blow-Out'
+									})
+										p This is a great service for a first-time highlight. Adds some highlight in the hairline and part. Limited to a total of 6 foils. Includes haircut and styling.
+
+
+
+	// PARTNERS
+	section.section-lg.section-lg-4.bg-gray-600.text-center
+		.container
+			.wow-outer
+				.wow.slideInDown
+					h2 partners
+					// Owl Carousel
+					.owl-carousel.owl-dots-secondary.dots-offset-lg.offset-top-2(data-items='1' data-sm-items='2', data-dots-each="2"  data-lg-items='4' data-dots='true' data-nav='false' data-stage-padding='0', data-loop='false', data-margin='30', data-mouse-drag="false")
+						a(href='#').box-sponsor.box-sponsor-modern.wow-outer
+							.wow.fadeInUp
+								+png('logo-inverse-1-270x121')
+						a(href='#').box-sponsor.box-sponsor-modern.wow-outer
+							.wow.fadeInUp
+								+png('logo-inverse-2-270x121')
+						a(href='#').box-sponsor.box-sponsor-modern.wow-outer
+							.wow.fadeInUp
+								+png('logo-inverse-3-270x121')
+						a(href='#').box-sponsor.box-sponsor-modern.wow-outer
+							.wow.fadeInUp
+								+png('logo-inverse-4-270x121')
+						a(href='#').box-sponsor.box-sponsor-modern.wow-outer
+							.wow.fadeInUp
+								+png('logo-inverse-1-270x121')
+						a(href='#').box-sponsor.box-sponsor-modern.wow-outer
+							.wow.fadeInUp
+								+png('logo-inverse-2-270x121')
+						a(href='#').box-sponsor.box-sponsor-modern.wow-outer
+							.wow.fadeInUp
+								+png('logo-inverse-3-270x121')
+						a(href='#').box-sponsor.box-sponsor-modern.wow-outer.wow.fadeInUp
+								+png('logo-inverse-4-270x121')
+
+
+	section.section.section-lg.section-lg-5.text-center.bg-gray-1
+		.container
+			.wow.slideInDown
+				h2 Subscribe to Stay Informed
+				.row.justify-content-md-center: .col-md-9.col-lg-8.col-xl-7.wow-outer
+					form.rd-form.rd-form-2.rd-mailform.rd-form-inline(data-form-output="form-output-global", data-form-type='subscribe', method='post', action='bat/rd-mailform.php')
+						.form-wrap
+							input.form-input(id="subscribe-form-email" type="email" name="email" data-constraints="@Email @Required")
+							label.form-label(for="subscribe-form-email") E-mail
+						.form-button
+							button.button.button-third.button-lg(type="submit") Subscribe
+
+
+	+parallax({
+		img: 'parallax-img-2.jpg',
+		innerClass: 'section-xxl text-center context-dark'
+	})
+		.container
+			.wow-outer
+				.wow.slideInDown
+					h2 Testimonials
+			// Slick Carousel
+			.slick-slider.carousel-parent(data-arrows="true", data-loop="false", data-dots="false", data-swipe="true", data-items="1" data-child="#child-carousel", data-for="#child-carousel", data-autoplay="true")
+				.item
+					.testimonials-modern
+						.testimonials-modern-text
+							p Janette cut my hair and did partial highlights and my experience was excellent! She took her time doing my hair and I am very pleased with the results. If you are still looking where to have your hair cut the best way, head for Curl !
+						.testimonials-modern-name Kate Wilson
+				.item
+					.testimonials-modern
+						.testimonials-modern-text
+							p Lauren made my hair look the best it's ever looked. My mom and I were in for the weekend out of town and decided to get our hair done. I knew I wanted to try something new with my hair, and your stylist was so accommodating and a joy to be around.
+						.testimonials-modern-name Julia Parker
+				.item
+					.testimonials-modern
+						.testimonials-modern-text
+							p There are hair salons, and there's Curl , a team of true hair experts. Being from NYC, I've been to many well-known salons and I've never had a better experience. Stylists here listen to you and ensure that you always leave with what you have asked for.
+						.testimonials-modern-name Susan	Davis
+				.item
+					.testimonials-modern
+						.testimonials-modern-text
+							p I've been coming here for years and I can confidently say that Curl  is the best hair salon that is also very consistent with the quality of service and hair color. Besides great hairstyling experience, you can also enjoy a unique and friendly atmosphere at this salon.
+						.testimonials-modern-name Anne	Jackson
+
+			.slick-slider.slider-dots#child-carousel(data-for=".carousel-parent", data-arrows="false",
+			data-loop="false", data-dots="false", data-swipe="true",
+			data-items="4", data-xs-items="4", data-sm-items="4",
+			data-md-items="4", data-lg-items="4", data-xl-items="4" data-slide-to-scroll="1")
+				.item
+					.slick-dot-item
+						+jpg('user-1-60x60')
+				.item
+					.slick-dot-item
+						+jpg('user-2-60x60')
+				.item
+					.slick-dot-item
+						+jpg('user-3-60x60')
+				.item
+					.slick-dot-item
+						+jpg('user-4-60x60')
+
+
+
+	section.section-lg.bg-default#blog
+		.container.wow-outer
+			h2.text-center.wow.slideInDown Recent News
+			// Owl Carousel
+			.owl-carousel.owl-dots-dark.wow.fadeInUp(data-items='1', data-md-items='2' data-lg-items='3' data-dots='true' data-nav='false' data-stage-padding='15', data-loop='false', data-margin='30', data-mouse-drag="false", data-autoplay='true')
+				+post-corporate({
+					date: 'Jul 02, 2022',
+					title: 'How Often Should You Get A New HairCut?'
+				})
+					p Knowing how often to cut your hair has a lot to do with your hair goals and the chemical processes you put your hair through on a regular basis. This...
+
+				+post-corporate({
+					date: 'Jul 12, 2022',
+					title: 'The Best Styling Options For Your HairCut'
+				})
+					p Whether you have short hair, bangs or a pixie cut – there is always one hair product that will enhance your haircut. Keep reading for the ultimate cheat...
+
+				+post-corporate({
+					date: 'aug 02, 2022',
+					title: 'How to Choose the Right Bridal Hairstyle'
+				})
+					p After picking out your wedding dress and finalizing other wedding plans, you need to start planning your wedding hairstyle. While this may not be...
+				+post-corporate({
+					date: 'aug 15, 2022',
+					title: 'Products Everyone Needs for Healthy Hair'
+				})
+					p Healthy hair is something that everyone wants. This can be hard to achieve at times, however, since so many of us use styling tools and don’t get...
+
+				+post-corporate({
+					date: 'Sep 15, 2022',
+					title: 'Easiest Hairstyles When You’re In a Hurry'
+				})
+					p Mornings are never perfect, and when you find yourself rushing to get ready after sleeping through all three of your alarms, you know it’s going to be...
+
+				+post-corporate({
+					date: 'Sep 28, 2022',
+					title: 'What Causes Hair Breakage & Split Ends'
+				})
+					p In the midst of a dry and cold winter season, having a lack of moisture in your hair is essentially inevitable. In our previous blog, we talked about...
+				+post-corporate({
+					date: 'Oct 05, 2022',
+					title: 'How to Deal with Frizzy Hair: Your Questions Answered'
+				})
+					p It’s not just styling products that can help you manage frizzy hair; using the right system of shampoo and conditioner makes a huge...
+				+post-corporate({
+					date: 'Oct 17, 2022',
+					title: 'Getting More Volume In Your Hair in 3 Easy Steps'
+				})
+					p The desire to have shiny, healthy, and luscious hair is something women across the world share and continually struggle to attain. That perfect look...
+				+post-corporate({
+					date: 'Nov 10, 2022',
+					title: 'Tips on Coloring and Maintaining Hair Extensions'
+				})
+					p Exploring different hairstyles can include different lengths and cuts, but also a whole array of beautiful hair colors that can change your entire...
+
+	include ../includes/_section-contact-form
+	// Page Footer
+	include ../sections/_footer-minimal

@@ -1,0 +1,135 @@
+/*
+* Blocks
+*/
+
+%block-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// The block element can be centered horizontally
+//
+.block-center {
+	@extend %block-center;
+}
+
+// Limits block width and block element can be centered horizontally
+//
+.block-sm {
+	@extend %block-center;
+	max-width: 560px;
+}
+
+.block-lg {
+	@extend %block-center;
+	max-width: 768px;
+}
+
+// Block center
+.block-center {
+	padding: 10px;
+
+	&:hover {
+		.block-center-header {
+			background-color: $primary;
+		}
+	}
+}
+
+.block-center-inner {
+}
+
+.block-center-inner-aside {
+}
+
+.block-center-inner-main {
+}
+
+.block-center-title {
+	background-color: $white;
+}
+
+@include media-breakpoint-down(xxl) {
+	.block-center {
+		padding: 20px;
+
+		&:hover {
+			.block-center-header {
+				background-color: $white;
+			}
+		}
+	}
+
+	.block-center-header {
+		background-color: $primary;
+	}
+}
+
+
+//block bordered left
+.block-bordered-left {
+	position: relative;
+	@include media-breakpoint-up(xl) {
+		padding: 0 65px;
+		
+		&:before {
+			position: absolute;
+			content: '';
+			left: -15px;
+			height: 100%;
+			width: 2px;
+			background: $gray-400;
+		}
+	}
+}
+
+.block-decorate-img {
+	position: relative;
+	max-width: 540px;
+	
+	padding-left: 40px;
+	padding-bottom: 50px;
+	text-align: right;
+	> * {
+		position: relative;
+		z-index: 1;
+	}
+	&:before {
+		position: absolute;
+		content: '';
+		top: 20px;
+		right: 60px;
+		left: 0;
+		bottom: 0;
+		background: url('../images/bg-dot.png');
+		opacity: .2;
+		z-index: 0;
+	}
+}
+
+.row-decorate {
+	> * + * {
+		@include media-breakpoint-up(xl) {
+			&:before {
+				position: absolute;
+				content: '';
+				top: 0;
+				bottom: 0;
+				left: -20px;
+				border-left: 1px solid rgba($white, .1);
+				transform: rotate(30deg);
+				
+			}
+		}
+	}
+}
+
+// Block 1
+
+.block-1 {
+	// Large ≥1200px
+	@include media-breakpoint-up(xl) {
+		padding-top: 50px;
+		margin-right: 30px;
+	}
+}

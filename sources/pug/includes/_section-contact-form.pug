@@ -1,0 +1,51 @@
+section.section.section-lg.bg-gray-1#contacts
+	.container
+		.row.justify-content-left.justify-content-lg-between.row-2-columns-bordered.row-50
+			.col-md-10.col-lg-4
+				h2.text-center.text-sm-start CONTACTS
+				.row-md-6.row-lg-4
+					+box-icon-modern({
+						classMod: 'decorate-triangle decorate-color-primary-light',
+						icon: 'linearicons-phone-incoming icon-gray-800',
+						link: 'tel:#',
+						title: '1-800-123-1234'
+					})
+						p You can call us anytime
+				.row-md-6.row-lg-4
+					+box-icon-modern({
+						classMod: 'decorate-circle decorate-color-primary-light',
+						icon: 'linearicons-map2 icon-gray-800',
+						title: '51 Francis Street, Darlinghurst NSW 2010, United States'
+					})
+
+				.row-md-6.row-lg-4
+					+box-icon-modern({
+						classMod: 'decorate-rectangle decorate-color-primary-light',
+						icon: 'linearicons-paper-plane icon-gray-800',
+						link: 'mailto:#',
+						title: 'info@demolink.org'
+					})
+						p Feel free to email us your questions
+
+
+
+
+			.col-md-10.col-lg-7
+				h2.text-center.text-sm-start GET IN TOUCH
+				// RD Mailform
+				form.rd-form.rd-mailform(data-form-output='form-output-global', data-form-type='contact', method='post', action='bat/rd-mailform.php')
+					.form-wrap.rd-form-2-2
+						input#contact-name.form-input(type='text' name='name' data-constraints='@Required')
+						label.form-label(for='contact-name') Name
+
+					.form-wrap.rd-form-2-2
+						input#contact-email.form-input(type='email' name='email' data-constraints='@Email @Required')
+						label.form-label(for='contact-email') Email
+
+					.form-wrap.rd-form-2-2
+						label.form-label(for='contact-message')  Message
+						textarea#contact-message.form-input(name='message' data-constraints='@Required')
+
+					.row.justify-content-left
+						.col-12.col-sm-7.col-lg-5
+							button.button.button-third(type='submit') Send Message

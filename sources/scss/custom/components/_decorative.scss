@@ -1,0 +1,36 @@
+.decorative-line {
+	position: relative;
+	&::before{
+		content: '';
+		position: absolute;
+		bottom: -14px;
+		left: calc(50% - 31px);
+		width: 62px;
+		height: 3px;
+		background: $white;
+	}
+}
+
+.decorative-square {
+	position: relative;
+	z-index: 2;
+	&::before {
+		// Large ≥992px
+		@include media-breakpoint-up(lg) {
+			content: '';
+			position: absolute;
+			top: -58px;
+			right: -46px;
+			width: 488px;
+			height: 495px;
+			background: rgba($white, 0.05);
+			z-index: -1;
+		}
+
+		// Large ≥992px
+		@include media-breakpoint-up(xl) {
+			top: -46px;
+			right: 14px;
+		}
+	}
+}
