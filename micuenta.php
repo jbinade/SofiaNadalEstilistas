@@ -1,5 +1,22 @@
 <?php
-session_start();
+include("seguridad.php");
+include("conectar_db.php");
+
+try {
+
+    $con = new Conexion();
+    $conexion = $con->conectar_db();
+    $dni = $_SESSION["dni"];
+
+    $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
+    $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+    $stmt->execute();
+    $res = $stmt->fetch(PDO::FETCH_OBJ);
+
+} catch (PDOException $e) {
+    echo "Error al recuperar datos: " . $e->getMessage();
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,11 +65,13 @@ session_start();
                   <div class="rd-navbar-nav-wrap">
                     <!-- RD Navbar Nav-->
                     <ul class="rd-navbar-nav">
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="micuenta.php">Mi Cuenta</a>
+                      </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="reservarCita.php">Reservar Cita</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="registro.php">Registrarse</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Mis Reservas</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="login.php">Login</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
                       </li>
                     </ul>
                   <!-- </div> -->
@@ -63,77 +82,88 @@ session_start();
         </div>
       </header>
     
- 
-      <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
+<?php
+
+try {
+
+    $con = new Conexion();
+    $conexion = $con->conectar_db();
+    $dni = $_SESSION["dni"];
+
+    $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
+    $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+    $stmt->execute();
+    $res = $stmt->fetch(PDO::FETCH_OBJ);
+
+    if ($res) {
+    ?>
+    <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
         <div class="container">
-          <div class="row justify-content-left justify-content-lg-between row-2-columns-bordered row-50">
-            <div class="col-md-10 col-lg-4">
-              <h2 class="text-center text-sm-start">CONTACTO</h2>
-              <div class="row-md-6 row-lg-4">
-                <div class="box-icon-modern">
-                  <div class="box-icon-inner decorate-triangle decorate-color-primary-light"><span class="icon-xl linearicons-phone-incoming icon-gray-800"></span></div>
-                  <div class="box-icon-caption">
-                    <h4><a href="#">1-800-123-1234</a></h4>
-                    <p>You can call us anytime</p>
-                  </div>
+          <div class="row justify-content-center justify-content-lg-center row-2-columns-bordered row-50">
+            <div class="col-md-10 col-lg-8">
+                    <h2 class="text-center text-sm-start">MIS DATOS</h2>
+              <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>DNI</th>
+                            <td><?php echo $res->dni; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <td><?php echo $res->nombre; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Apellidos</th>
+                            <td><?php echo $res->apellidos; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td><?php echo $res->email; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Teléfono</th>
+                            <td><?php echo $res->telefono; ?></td>
+                        </tr>
+                        <!-- Añade más filas para mostrar otros campos según lo necesites -->
+                    </table>
                 </div>
-              </div>
-              <div class="row-md-6 row-lg-4">
-                <div class="box-icon-modern">
-                  <div class="box-icon-inner decorate-circle decorate-color-primary-light"><span class="icon-xl linearicons-map2 icon-gray-800"></span></div>
-                  <div class="box-icon-caption">
-                    <h4><a href="#">51 Francis Street, Darlinghurst NSW 2010, United States</a></h4>
-                  </div>
+                <div class="row justify-content-between align-items-center">
+                    <!-- Para tamaños de pantalla extra pequeños (xs) y pequeños (sm) -->
+                    <div class="col-12 d-block d-sm-none"> <!-- Se mostrará en filas diferentes en xs y sm -->
+                        <a href="editarmicuenta.php?dni='<?php $res->dni ?>'" class="d-block mb-3"><button class="button button-third" type="submit">Editar Cuenta</button></a>
+                    </div>
+                    <div class="col-12 d-block d-sm-none"> <!-- Se mostrará en filas diferentes en xs y sm -->
+                        <a href="eliminarmicuenta.php" class="d-block mb-3"><button class="button button-third" type="submit">Eliminar Cuenta</button></a>
+                    </div>
+                    <div class="col-12 d-block d-sm-none"> <!-- Se mostrará en filas diferentes en xs y sm -->
+                        <a href="actualizarcotraseña.php" class="d-block mb-3"><button class="button button-third" type="submit">Actualizar Contraseña</button></a>
+                    </div>
+
+                    <!-- Para tamaños de pantalla medianos (md) y grandes (lg) -->
+                    <div class="col-sm-4 d-none d-sm-block"> <!-- Se mostrará en la misma fila en md y lg -->
+                        <a href="editarmicuenta.php" class="d-block"><button class="button button-third" type="submit">Editar Cuenta</button></a>
+                    </div>
+                    <div class="col-sm-4 d-none d-sm-block"> <!-- Se mostrará en la misma fila en md y lg -->
+                        <a href="eliminarmicuenta.php" class="d-block"><button class="button button-third" type="submit">Eliminar Cuenta</button></a>
+                    </div>
+                    <div class="col-sm-4 d-none d-sm-block"> <!-- Se mostrará en la misma fila en md y lg -->
+                        <a href="actualizarcontraseña.php" class="d-block"><button class="button button-third" type="submit">Actualizar Contraseña</button></a>
+                    </div>
                 </div>
-              </div>
-              <div class="row-md-6 row-lg-4">
-                <div class="box-icon-modern">
-                  <div class="box-icon-inner decorate-rectangle decorate-color-primary-light"><span class="icon-xl linearicons-paper-plane icon-gray-800"></span></div>
-                  <div class="box-icon-caption">
-                    <h4><a href="#">info@demolink.org</a></h4>
-                    <p>Feel free to email us your questions</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-10 col-lg-7">
-              <h2 class="text-center text-sm-start">INICIAR SESIÓN</h2>
-              <!-- RD Mailform-->
-                <form class="form-login" method="post" action="conexion.php">
-                        <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="email" type="email" name="email" data-constraints="@Email @Required">
-                            <label class="form-label" for="email">Email</label>
-                            </div>
-                            <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="contrasena" type="password" name="contrasena" data-constraints="@Required">
-                            <label class="form-label" for="contrasena">Contraseña</label>
-                            </div>
-                        
-                        <!-- <div class="row justify-content-left">
-                        <div class="col-12 col-sm-7 col-lg-5">
-                            <button class="button button-third" type="submit">Enviar</button>
-                            <button class="button button-third" type="submit">Registrarse</button>
-                        </div>
-                        </div> -->
-                        <?php
-                            if (isset($_GET['error']) && $_GET['error'] == 1) {
-                                echo '<p class="mensaje-login">Datos Incorrectos</p>';
-                            }
-                        ?>
-                        <div class="row justify-content-between align-items-center">
-                            <!-- Los botones estarán en fila con espacio entre ellos en escritorio y tablet -->
-                            <div class="col-12 col-sm-3"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <input class="button button-third mb-2 mb-sm-0 boton-login" type="submit">
-                            </div>
-                            <div class="col-12 col-sm-9"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <a href="registro.php"><button class="button button-third" type="submit">Registrarse</button></a>
-                            </div>
-                        </div>
-                </form>
             </div>
           </div>
         </div>
       </section>
+    <?php
+        
+    }
+
+} catch (PDOException $e) {
+    echo "Error al recuperar datos: " . $e->getMessage();
+
+}
+
+?>
       <!-- Page Footer-->
       <footer class="section footer-minimal context-dark">
         <div class="container wow-outer">
@@ -145,10 +175,9 @@ session_start();
               </div>
               <div class="col-12">
                 <ul class="footer-minimal-nav">
-                  <li><a href="#">Pricing</a></li>
-                  <li><a href="#contacts">Contacts</a></li>
-                  <li><a href="#gallery">Gallery</a></li>
-                  <li><a href="#">About</a></li>
+                  <li><a href="index.php">Inicio</a></li>
+                  <li><a href="reservarCita.php">Reservar Cita</a></li>
+                  <li><a href="registro.php">Registrarse</a></li>
                 </ul>
               </div>
               <div class="col-12">

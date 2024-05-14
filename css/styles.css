@@ -29,3 +29,7 @@
 .mensaje-login {
     color: red;
 }
+
+.titulo-reserva {
+    text-transform: lowercase;
+}

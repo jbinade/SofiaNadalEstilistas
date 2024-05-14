@@ -51,9 +51,11 @@ session_start();
                     ?>
                         
                         <ul class="rd-navbar-nav">
-                          <li class="rd-nav-item"><a class="rd-nav-link" href="#about">Mi Cuenta</a>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="micuenta.php">Mi Cuenta</a>
                           </li>
-                          <li class="rd-nav-item"><a class="rd-nav-link" href="#pricing">Reservar Cita</a>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="reservarCita.php">Reservar Cita</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Mis Reservas</a>
                           </li>
                           <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
                           </li>
@@ -63,11 +65,11 @@ session_start();
                         // Si no está autenticado, incluye el formulario de inicio de sesión
                     ?>
                         <ul class="rd-navbar-nav">
-                          <li class="rd-nav-item"><a class="rd-nav-link" href="#about">About</a>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="#contacts">Contacto</a>
                           </li>
-                          <li class="rd-nav-item"><a class="rd-nav-link" href="#pricing">Pricing</a>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="reservarCita.php">Reservar Cita</a>
                           </li>
-                          <li class="rd-nav-item"><a class="rd-nav-link" href="#contacts">Contacts</a>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="registro.php">Registrarse</a>
                           </li>
                           <li class="rd-nav-item"><a class="rd-nav-link" href="login.php">Login</a>
                           </li>
@@ -101,34 +103,7 @@ session_start();
           </div>
         </div>
       </section>
-      <section class="section section-sm context-dark bg-secondary">
-        <div class="container">
-          <!-- RD Mailform-->
-          <form class="rd-form rd-mailform form-lg form-1" data-form-output="form-output-global" data-form-type="subscribe" method="post" action="bat/rd-mailform.php">
-            <div class="form-wrap-outer wow fadeIn"><span class="fw-regular body-font-size"> NAME</span>
-              <div class="form-wrap form-wrap-main">
-                <input class="form-input" id="form-1-destination" type="text" name="destination" data-constraints="@Required">
-                <label class="form-label" for="form-1-destination">Your name</label>
-              </div>
-            </div>
-            <div class="form-wrap-outer wow fadeIn" data-wow-delay=".025s"><span class="fw-regular body-font-size">PHONE</span>
-              <div class="form-wrap form-wrap-main">
-                <input class="form-input" id="form-1-phone" type="text" name="phone" data-constraints="@Numeric">
-                <label class="form-label" for="form-1-phone">Your phone number</label>
-              </div>
-            </div>
-            <div class="form-wrap-outer wow fadeIn" data-wow-delay=".05s"><span class="fw-regular body-font-size">DATE</span>
-              <div class="form-wrap form-wrap-main">
-                <input class="form-input" id="form-1-date" type="text" name="date" data-constraints="@Required" data-time-picker="date">
-                <label class="form-label" for="form-1-date">12/20/22</label>
-              </div>
-            </div>
-            <div class="form-button wow fadeIn" data-wow-delay=".075s">
-              <button class="button button-md button-primary" type="submit">Make an appointment</button>
-            </div>
-          </form>
-        </div>
-      </section>
+      
       <section class="section section-lg bg-default">
         <div class="container">
           <div class="row justify-content-center text-center">
@@ -275,120 +250,7 @@ session_start();
         </div>
       </section>
       
-      <section class="section section-lg section-lg-4 bg-gray-1" id="pricing">
-        <div class="container">
-          <h2 class="text-center wow slideInUp">Pricing</h2>
-          <div class="row offset-top-1">
-            <div class="col-12 wow slideInUp">
-              <div class="tabs-custom tabs-horizontal tabs-classic" id="tabs-1">
-                <ul class="nav nav-tabs nav-tabs-classic">
-                  <li class="nav-item" role="presentation"><a class="nav-link active" href="#tabs-1-1" data-bs-toggle="tab">haircuts</a></li>
-                  <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-2" data-bs-toggle="tab">hairstyling</a></li>
-                  <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-3" data-bs-toggle="tab">coloring</a></li>
-                </ul>
-                <div class="tab-content">
-                  <div class="tab-pane fade show active" id="tabs-1-1">
-                    <div class="box-event-modern">
-                      <div class="event-item-modern event-active">
-                        <p class="event-time">$10.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">Ladies’ Haircut</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>Curl provides a long list of salon services that will have women looking fabulous. Women can treat themselves to just a haircut or they can also choose from any of our expert services.</p>
-                        </div>
-                      </div>
-                      <div class="event-item-modern">
-                        <p class="event-time">$9.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">Men’s Haircut</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>A men’s haircut comes with a refreshing shampoo, stimulating scalp massage and an essential oil hot towel treatment.</p>
-                        </div>
-                      </div>
-                      <div class="event-item-modern">
-                        <p class="event-time">$11.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">Kids’ Haircut</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>A trip to our salon is always enjoyable for kids of all ages. While we service clients of all ages, the experience for children will make them feel special.</p>
-                        </div>
-                      </div>
-                      <div class="event-item-modern">
-                        <p class="event-time">$8.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">Senior Haircut</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>Our staff puts a great amount of pride in our senior haircut service as we believe people simply get better with age. Style and elegance can be yours at discounted senior prices.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="tabs-1-2">
-                    <div class="box-event-modern">
-                      <div class="event-item-modern event-active">
-                        <p class="event-time">$20.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">Blowout</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>A full blowout service at Curl  includes two washes, one wash using clarifying shampoo, and the other is completed with a Blowout Shampoo and thermal protectant.</p>
-                        </div>
-                      </div>
-                      <div class="event-item-modern">
-                        <p class="event-time">$16.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">Curls</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>Enjoy a great shape with a customized curly cut, trim or shaping that's designed to bring out the best in your curls and express your individuality.</p>
-                        </div>
-                      </div>
-                      <div class="event-item-modern">
-                        <p class="event-time">$15.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">UpDo</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>An updo is a hairstyle that is completely pinned up. Whether it is a high ponytail with braiding included, a low side bun with twists, or anything in between, we can manage it.</p>
-                        </div>
-                      </div>
-                      <div class="event-item-modern">
-                        <p class="event-time">$14.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">Event HairStyling</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>If you have a special event coming up, then our event styling services for your hair are just what you need. Our team of stylists will make you look your best.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="tabs-1-3">
-                    <div class="box-event-modern">
-                      <div class="event-item-modern event-active">
-                        <p class="event-time">$10.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">All-over Hair Color</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>All -Over Hair Color is a single-process hair color with scalp-to-ends application, also known as a “solid color” service. Price depends on hair length.</p>
-                        </div>
-                      </div>
-                      <div class="event-item-modern">
-                        <p class="event-time">$19.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">Inoa Color</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>The ultimate in ammonia-free color that is gentler and healthier on your scalp.  We have 22 patents for a color that is pure, vibrant and more beautiful than ever.</p>
-                        </div>
-                      </div>
-                      <div class="event-item-modern">
-                        <p class="event-time">$11.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">Retouch Lightener (Includes Toner)</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>This service is ideal for maintaining an all-over blonde look. Toner guarantees an excellent result. Price depends on hair length.</p>
-                        </div>
-                      </div>
-                      <div class="event-item-modern">
-                        <p class="event-time">$16.89</p>
-                        <h4 class="event-item-modern-title"><a href="#">6 Foil Highlight with Haircut &amp; Blow-Out</a></h4>
-                        <div class="event-item-modern-text">
-                          <p>This is a great service for a first-time highlight. Adds some highlight in the hairline and part. Limited to a total of 6 foils. Includes haircut and styling.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
       <!-- PARTNERS-->
       
       

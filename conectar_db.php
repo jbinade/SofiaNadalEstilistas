@@ -12,7 +12,7 @@ class Cliente {
     public $contrasena;
 
 
-    public function __construct($dni, $nombre, $apellidos, $telefono, $rol, $direccion, $localidad, $provincia, $email, $contrasena) {
+    public function __construct($dni, $nombre, $apellidos, $telefono, $rol, $email, $contrasena) {
         $this->dni = $dni;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
