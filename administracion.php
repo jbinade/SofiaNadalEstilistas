@@ -2,7 +2,11 @@
 include("seguridad.php");
 include("conectar_db.php");
 
+$rol = $_SESSION["rol"];
 
+if ($rol == "usuario") {
+  header("Location: index.php");
+}
 
 try {
 
@@ -67,11 +71,11 @@ try {
                   <div class="rd-navbar-nav-wrap">
                     <!-- RD Navbar Nav-->
                     <ul class="rd-navbar-nav">
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="micuenta.php">Mi Cuenta</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administración</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="reservarCita.php">Reservar Cita</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Mis Reservas</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="servicios.php">Servicios</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
                       </li>
@@ -102,56 +106,70 @@ try {
     <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
         <div class="container">
           <div class="row justify-content-center justify-content-lg-center row-2-columns-bordered row-50">
-            <div class="col-md-10 col-lg-8">
-                    <h2 class="text-center text-sm-start">MIS DATOS</h2>
-              <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th>DNI</th>
-                            <td><?php echo $res->dni; ?></td>
-                        </tr>
-                        <tr>
-                            <th>Nombre</th>
-                            <td><?php echo $res->nombre; ?></td>
-                        </tr>
-                        <tr>
-                            <th>Apellidos</th>
-                            <td><?php echo $res->apellidos; ?></td>
-                        </tr>
-                        <tr>
-                            <th>Email</th>
-                            <td><?php echo $res->email; ?></td>
-                        </tr>
-                        <tr>
-                            <th>Teléfono</th>
-                            <td><?php echo $res->telefono; ?></td>
-                        </tr>
-                        <!-- Añade más filas para mostrar otros campos según lo necesites -->
-                    </table>
-                </div>
-                <div class="row justify-content-between align-items-center">
-                    <!-- Para tamaños de pantalla extra pequeños (xs) y pequeños (sm) -->
-                    <div class="col-12 d-block d-sm-none"> <!-- Se mostrará en filas diferentes en xs y sm -->
-                        <a href="editarmicuenta.php?dni='<?php $res->dni ?>'" class="d-block mb-3"><button class="button button-third" type="submit">Editar Cuenta</button></a>
-                    </div>
-                    <div class="col-12 d-block d-sm-none"> <!-- Se mostrará en filas diferentes en xs y sm -->
-                        <a href="eliminarmicuenta.php" class="d-block mb-3"><button class="button button-third" type="submit">Eliminar Cuenta</button></a>
-                    </div>
-                    <div class="col-12 d-block d-sm-none"> <!-- Se mostrará en filas diferentes en xs y sm -->
-                        <a href="actualizarcotraseña.php" class="d-block mb-3"><button class="button button-third" type="submit">Actualizar Contraseña</button></a>
-                    </div>
+            <div class="col-md-10 col-lg-10">
+                   
+                <div class="card text-center">
+                    <div class="card-header">
 
-                    <!-- Para tamaños de pantalla medianos (md) y grandes (lg) -->
-                    <div class="col-sm-4 d-none d-sm-block"> <!-- Se mostrará en la misma fila en md y lg -->
-                        <a href="editarmicuenta.php" class="d-block"><button class="button button-third" type="submit">Editar Cuenta</button></a>
+                    <?php
+                      if($rol == 'administrador') {
+                      ?>
+                        <ul class="nav nav-tabs card-header-tabs">
+                          <li class="nav-item">
+                              <a class="nav-link active" aria-current="true" href="#">Mis Datos</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="empleados.php">Empleados</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="clientes.php">Clientes</a>
+                          </li>
+                        </ul>
+                    <?php
+                      } else {
+                    ?>
+                      <ul class="nav nav-tabs card-header-tabs">
+                          <li class="nav-item">
+                              <a class="nav-link active" aria-current="true" href="#">Mis Datos</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="clientes.php">Clientes</a>
+                          </li>
+                        </ul>
+                    <?php
+                      }
+                    ?>                        
+
                     </div>
-                    <div class="col-sm-4 d-none d-sm-block"> <!-- Se mostrará en la misma fila en md y lg -->
-                        <a href="eliminarmicuenta.php" class="d-block"><button class="button button-third" type="submit">Eliminar Cuenta</button></a>
+                    <div class="card-body">
+                    <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">DNI</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><?php echo $res->dni ?></th>
+                            <td><?php echo $res->nombre ?></td>
+                            <td><?php echo $res->apellidos ?></td>
+                            <td><?php echo $res->telefono ?></td>
+                            <td><?php echo $res->email ?></td>
+                    <?php
+                            echo "<td><a href='editardatosAdmin.php?dni=" . $res->dni . "'><img class='imagen-tabla' src='./images/editar.png' alt='Editar'></a></td>";
+                            echo "<td><a href='eliminardatosAdmin.php?dni=" . $res->dni . "'><img class='imagen-tabla' src='./images/borrar.jpg' alt='Borrar'></a></td>";
+                    ?>
+                        </tr>
+                    </tbody>
+                    </table>
                     </div>
-                    <div class="col-sm-4 d-none d-sm-block"> <!-- Se mostrará en la misma fila en md y lg -->
-                        <a href="actualizarcontraseña.php" class="d-block"><button class="button button-third" type="submit">Actualizar Contraseña</button></a>
-                    </div>
-                </div>
+                </div> 
             </div>
           </div>
         </div>

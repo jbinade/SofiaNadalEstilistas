@@ -33,3 +33,13 @@
 .titulo-reserva {
     text-transform: lowercase;
 }
+
+.cuenta-datos {
+    width: 200px;
+    height: 200px;
+}
+
+.imagen-tabla {
+    width: 20px;
+    height: 20px;
+}

@@ -1,25 +1,41 @@
 <?php
+
 include("seguridad.php");
-include("conectar_db.php");
 
+$rol = $_SESSION["rol"];
 
-
-try {
-
-    $con = new Conexion();
-    $conexion = $con->conectar_db();
-    $dni = $_SESSION["dni"];
-
-    $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
-    $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
-    $stmt->execute();
-    $res = $stmt->fetch(PDO::FETCH_OBJ);
-
-} catch (PDOException $e) {
-    echo "Error al recuperar datos: " . $e->getMessage();
-
+if ($rol == "usuario") {
+  header("Location: index.php");
 }
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include("conectar_db.php");
+
+    $dni = $_SESSION["dni"];
+    
+   
+
+    try {
+
+        $con = new Conexion();
+        $conexion = $con->conectar_db();
+        $stmt = $conexion->prepare('UPDATE clientes SET activo = 0 WHERE dni = :dni');
+        $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+        $stmt->execute();
+
+        header("Location: salir.php");
+        
+    } catch(PDOException $e) {
+            echo 'Error al eliminar el cliente: ' . $e->getMessage();
+    }
+        
+      
+}
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
@@ -67,11 +83,11 @@ try {
                   <div class="rd-navbar-nav-wrap">
                     <!-- RD Navbar Nav-->
                     <ul class="rd-navbar-nav">
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="micuenta.php">Mi Cuenta</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administración</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="reservarCita.php">Reservar Cita</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Mis Reservas</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="servicios.php">Servicios</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
                       </li>
@@ -84,88 +100,26 @@ try {
         </div>
       </header>
     
-<?php
-
-try {
-
-    $con = new Conexion();
-    $conexion = $con->conectar_db();
-    $dni = $_SESSION["dni"];
-
-    $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
-    $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
-    $stmt->execute();
-    $res = $stmt->fetch(PDO::FETCH_OBJ);
-
-    if ($res) {
-    ?>
-    <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
+ 
+      <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
         <div class="container">
-          <div class="row justify-content-center justify-content-lg-center row-2-columns-bordered row-50">
-            <div class="col-md-10 col-lg-8">
-                    <h2 class="text-center text-sm-start">MIS DATOS</h2>
-              <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th>DNI</th>
-                            <td><?php echo $res->dni; ?></td>
-                        </tr>
-                        <tr>
-                            <th>Nombre</th>
-                            <td><?php echo $res->nombre; ?></td>
-                        </tr>
-                        <tr>
-                            <th>Apellidos</th>
-                            <td><?php echo $res->apellidos; ?></td>
-                        </tr>
-                        <tr>
-                            <th>Email</th>
-                            <td><?php echo $res->email; ?></td>
-                        </tr>
-                        <tr>
-                            <th>Teléfono</th>
-                            <td><?php echo $res->telefono; ?></td>
-                        </tr>
-                        <!-- Añade más filas para mostrar otros campos según lo necesites -->
-                    </table>
-                </div>
+              <h2 class="text-center text-sm-start">¿Desea eliminar la cuenta?</h2>
+              <!-- RD Mailform-->
+              <form class="form-login" method="post" action="eliminardatosAdmin.php">
                 <div class="row justify-content-between align-items-center">
-                    <!-- Para tamaños de pantalla extra pequeños (xs) y pequeños (sm) -->
-                    <div class="col-12 d-block d-sm-none"> <!-- Se mostrará en filas diferentes en xs y sm -->
-                        <a href="editarmicuenta.php?dni='<?php $res->dni ?>'" class="d-block mb-3"><button class="button button-third" type="submit">Editar Cuenta</button></a>
-                    </div>
-                    <div class="col-12 d-block d-sm-none"> <!-- Se mostrará en filas diferentes en xs y sm -->
-                        <a href="eliminarmicuenta.php" class="d-block mb-3"><button class="button button-third" type="submit">Eliminar Cuenta</button></a>
-                    </div>
-                    <div class="col-12 d-block d-sm-none"> <!-- Se mostrará en filas diferentes en xs y sm -->
-                        <a href="actualizarcotraseña.php" class="d-block mb-3"><button class="button button-third" type="submit">Actualizar Contraseña</button></a>
-                    </div>
-
-                    <!-- Para tamaños de pantalla medianos (md) y grandes (lg) -->
-                    <div class="col-sm-4 d-none d-sm-block"> <!-- Se mostrará en la misma fila en md y lg -->
-                        <a href="editarmicuenta.php" class="d-block"><button class="button button-third" type="submit">Editar Cuenta</button></a>
-                    </div>
-                    <div class="col-sm-4 d-none d-sm-block"> <!-- Se mostrará en la misma fila en md y lg -->
-                        <a href="eliminarmicuenta.php" class="d-block"><button class="button button-third" type="submit">Eliminar Cuenta</button></a>
-                    </div>
-                    <div class="col-sm-4 d-none d-sm-block"> <!-- Se mostrará en la misma fila en md y lg -->
-                        <a href="actualizarcontraseña.php" class="d-block"><button class="button button-third" type="submit">Actualizar Contraseña</button></a>
-                    </div>
+                    
+                            <!-- Los botones estarán en fila con espacio entre ellos en escritorio y tablet -->
+                            <div class="col-12 col-sm-3 col-lg-2"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
+                            <input class="button button-third mb-2 mb-sm-0 boton-login" type="submit">
+                            </div>
+                            <div class="col-12 col-sm-9 col-lg-10"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
+                                <a href="administracion.php"><button class="button button-third" type="submit">No, volver atrás</button></a>
+                            </div>
+                    
                 </div>
-            </div>
-          </div>
+            </form>
         </div>
       </section>
-    <?php
-        
-    }
-
-} catch (PDOException $e) {
-    echo "Error al recuperar datos: " . $e->getMessage();
-
-}
-
-?>
       <!-- Page Footer-->
       <footer class="section footer-minimal context-dark">
         <div class="container wow-outer">

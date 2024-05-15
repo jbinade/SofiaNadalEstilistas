@@ -48,6 +48,8 @@ session_start();
                     <!-- RD Navbar Nav-->
                     <?php
                     if (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] === true) {
+
+                      if (($_SESSION["rol"] == "usuario")) {
                     ?>
                         
                         <ul class="rd-navbar-nav">
@@ -61,6 +63,39 @@ session_start();
                           </li>
                         </ul>
                     <?php
+                      } else if(($_SESSION["rol"] == "administrador")) {
+                    
+                    ?>
+                        <ul class="rd-navbar-nav">
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administración</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="servicios.php">Servicios</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
+                          </li>
+                        </ul>
+                      
+
+
+                    <?php
+                      } else {
+                    ?>
+                        <ul class="rd-navbar-nav">
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administración</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="servicios.php">Servicios</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
+                          </li>
+                        </ul>
+                    <?php
+
+                      }
+
                     } else {
                         // Si no está autenticado, incluye el formulario de inicio de sesión
                     ?>
