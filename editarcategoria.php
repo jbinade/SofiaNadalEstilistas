@@ -12,36 +12,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     include("conectar_db.php");
 
+    $con = new Conexion();
+
     //array para almacenar fallos
     $fallos = array();
 
-    $dni = $_REQUEST["dni"];
-    $email = $_REQUEST["email"];
+    $codigo = $_REQUEST["codigo"];
     $nombre = $_REQUEST["nombre"];
-    $apellidos = $_REQUEST["apellidos"];
-    $telefono = $_REQUEST["telefono"];
 
     //verificar los campos
 
     if (empty($nombre)) {
-        $fallos["nombre"] = "El nombre es obligatorio";
+        $fallos["nombre"] = "El nombre de la categoría es obligatorio";
     }
 
-    if (empty($apellidos)) {
-        $fallos["apellidos"] = "Por favor, introduce el nombre completo";
-    }
+    try {
 
-    if  (empty($telefono)) {
-        $fallos["telefono"] = "El teléfono es obligatorio";
+        $conexion = $con->conectar_db();
+        $stmt = $conexion->prepare("SELECT * FROM categorias WHERE nombre = :nombre");
+        $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $nombreCategoria = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($nombreCategoria) {
+                $fallos["nombre"] = "Esta categoría ya se encuentra en la base de datos";
+        }
         
 
-    } else {
-
-        if (strlen($telefono) != 9 || !is_numeric($telefono)) {
-            $fallos["telefono"] = "Teléfono incorrecto";
-        }
+    } catch(PDOException $e) {
+            echo 'Error al insertar el nombre: ' . $e->getMessage();
     }
-   
 
     //si hay fallos al introducir el fomulario se vuelve a mostrar indicando el error en color rojo
     if (count($fallos) > 0) {
@@ -113,12 +114,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
       <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
         <div class="container">
-              <h2 class="text-center text-sm-start">Editar Cuenta</h2>
+              <h2 class="text-center text-sm-start">Editar Servicio</h2>
               <!-- RD Mailform-->
-                <form class="form-login" method="post" action="editarempleado.php">
+                <form class="form-login" method="post" action="editarcategoria.php">
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="dni" type="text" name="dni" value="<?php echo $dni; ?>" readonly>
-                            <label class="form-label" for="dni">DNI</label>
+                            <input class="form-input" id="codigo" type="text" name="codigo" value="<?php echo $codigo; ?>" readonly>
+                            <label class="form-label" for="codigo">Código</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
                             <input class="form-input" id="nombre" type="text" name="nombre" value="<?php echo $nombre; ?>" data-constraints="@Required">
@@ -129,28 +130,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 } 
                             ?>
                         </div>
-                        <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="apellidos" type="text" name="apellidos" value="<?php echo $apellidos; ?>" data-constraints="@Required">
-                            <label class="form-label" for="apellidos">Apellidos</label>
-                            <?php 
-                                if (isset($fallos["apellidos"])) { 
-                                    echo "<span style='color: red;'>". $fallos["apellidos"]."</span>"; 
-                                } 
-                            ?>
-                        </div>
-                        <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="email" type="email" name="email" value="<?php echo $email; ?>" readonly>
-                            <label class="form-label" for="email">Email</label>
-                        </div>
-                        <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="telefono" type="tel" name="telefono" pattern="[0-9]{9}" value="<?php echo $telefono; ?>" required>
-                            <label class="form-label" for="telefono">Teléfono</label>
-                            <?php 
-                              if (isset($fallos["telefono"])) { 
-                                 echo "<span style='color: red;'>". $fallos["telefono"]."</span>"; 
-                              } 
-                            ?>
-                        </div>
                         
                         <div class="row justify-content-between align-items-center">
                             <!-- Los botones estarán en fila con espacio entre ellos en escritorio y tablet -->
@@ -158,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input class="button button-third mb-2 mb-sm-0 boton-login" type="submit">
                             </div>
                             <div class="col-12 col-sm-9 col-lg-10"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <a href="empleados.php"><button class="button button-third" type="submit">Volver</button></a>
+                                <a href="categorias.php"><button class="button button-third" type="submit">Volver</button></a>
                             </div>
                         </div>
                         
@@ -216,13 +195,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $con = new Conexion();
             $conexion = $con->conectar_db();
             $stmt = $conexion->prepare(
-                'UPDATE clientes SET nombre = :nombre, apellidos = :apellidos, telefono = :telefono WHERE dni = :dni');
+                'UPDATE categorias SET nombre = :nombre WHERE codigo = :codigo');
         
-                $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
-                $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
-                $stmt->bindParam(':apellidos', $apellidos, PDO::PARAM_STR);
-                $stmt->bindParam(':telefono', $telefono, PDO::PARAM_STR);
-                        
+                $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
+                $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);    
                         
                 $stmt->execute();
         
@@ -230,7 +206,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo 'Error al actualizar el empleado: ' . $e->getMessage();
         }
         
-        header("Location: empleados.php");
+        header("Location: categorias.php");
 
     }
 
@@ -241,15 +217,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 
 include("conectar_db.php");
-if(isset($_REQUEST["dni"])) {
-    $dni = $_REQUEST["dni"];
+if(isset($_REQUEST["codigo"])) {
+    $codigo = $_REQUEST["codigo"];
 
 }
 
 $con = new Conexion();
 $conexion = $con->conectar_db();
-$stmt = $conexion->prepare('SELECT * FROM clientes WHERE dni = :dni');
-$stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+$stmt = $conexion->prepare('SELECT * FROM categorias WHERE codigo = :codigo');
+$stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
 $stmt->execute();
 
 $res = $stmt->fetch(PDO::FETCH_OBJ);
@@ -321,29 +297,17 @@ $res = $stmt->fetch(PDO::FETCH_OBJ);
  
       <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
         <div class="container">
-              <h2 class="text-center text-sm-start">Editar Cuenta</h2>
+              <h2 class="text-center text-sm-start">Editar Cartegoría</h2>
               <!-- RD Mailform-->
-                <form class="form-login" method="post" action="editarempleado.php">
+                <form class="form-login" method="post" action="editarcategoria.php">
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="dni" type="text" name="dni" value="<?php echo $res->dni; ?>" readonly>
-                            <label class="form-label" for="dni">DNI</label>
+                            <input class="form-input" id="codigo" type="text" name="codigo" value="<?php echo $res->codigo; ?>" readonly>
+                            <label class="form-label" for="codigo">Código</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
                             <input class="form-input" id="nombre" type="text" name="nombre" value="<?php echo $res->nombre; ?>" required>
                             <label class="form-label" for="nombre">Nombre</label>
-                        </div>
-                        <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="apellidos" type="text" name="apellidos" value="<?php echo $res->apellidos; ?>" required>
-                            <label class="form-label" for="apellidos">Apellidos</label>
-                        </div>
-                        <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="email" type="email" name="email" value="<?php echo $res->email; ?>" readonly>
-                            <label class="form-label" for="email">Email</label>
-                        </div>
-                        <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="telefono" type="tel" name="telefono" pattern="[0-9]{9}" value="<?php echo $res->telefono; ?>" required>
-                            <label class="form-label" for="telefono">Teléfono</label>
-                        </div>
+                        </div>  
                         
                         <div class="row justify-content-between align-items-center">
                             <!-- Los botones estarán en fila con espacio entre ellos en escritorio y tablet -->
@@ -351,7 +315,7 @@ $res = $stmt->fetch(PDO::FETCH_OBJ);
                                 <input class="button button-third mb-2 mb-sm-0 boton-login" type="submit">
                             </div>
                             <div class="col-12 col-sm-9 col-lg-10"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <a href="empleados.php"><button class="button button-third" type="submit">Volver</button></a>
+                                <a href="categorias.php"><button class="button button-third" type="submit">Volver</button></a>
                             </div>
                         </div>
                         

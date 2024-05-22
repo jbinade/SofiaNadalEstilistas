@@ -1,41 +1,29 @@
 <?php
-
 include("seguridad.php");
+include("conectar_db.php");
 
 $rol = $_SESSION["rol"];
 
 if ($rol == "usuario") {
-  header("Location: index.php");
+    header("Location: index.php");
 }
 
+try {
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include("conectar_db.php");
-
+    $con = new Conexion();
+    $conexion = $con->conectar_db();
     $dni = $_SESSION["dni"];
-    
-   
 
-    try {
+    $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
+    $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+    $stmt->execute();
+    $res = $stmt->fetch(PDO::FETCH_OBJ);
 
-        $con = new Conexion();
-        $conexion = $con->conectar_db();
-        $stmt = $conexion->prepare('UPDATE clientes SET activo = 0 WHERE dni = :dni');
-        $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
-        $stmt->execute();
+} catch (PDOException $e) {
+    echo "Error al recuperar datos: " . $e->getMessage();
 
-        header("Location: salir.php");
-        
-    } catch(PDOException $e) {
-            echo 'Error al eliminar el cliente: ' . $e->getMessage();
-    }
-        
-      
 }
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
@@ -100,26 +88,120 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </header>
     
- 
-      <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
+<?php
+
+try {
+
+    $con = new Conexion();
+    $conexion = $con->conectar_db();
+    $dni = $_SESSION["dni"];
+
+    $stmt = $conexion->prepare("SELECT * FROM servicios"); 
+    $stmt->execute();
+    $res = $stmt->fetch(PDO::FETCH_OBJ);
+
+    if ($res) {
+    ?>
+    <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
         <div class="container">
-              <h2 class="text-center text-sm-start">¿Desea eliminar la cuenta?</h2>
-              <!-- RD Mailform-->
-              <form class="form-login" method="post" action="eliminardatosAdmin.php">
-                <div class="row justify-content-between align-items-center">
-                    
-                            <!-- Los botones estarán en fila con espacio entre ellos en escritorio y tablet -->
-                            <div class="col-12 col-sm-3 col-lg-2"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                            <input class="button button-third mb-2 mb-sm-0 boton-login" type="submit">
-                            </div>
-                            <div class="col-12 col-sm-9 col-lg-10"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <a href="administracion.php"><button class="button button-third" type="submit">No, volver atrás</button></a>
-                            </div>
-                    
-                </div>
-            </form>
+          <div class="row justify-content-center justify-content-lg-center row-2-columns-bordered row-50">
+            <div class="col-md-10 col-lg-10">
+                   
+                <div class="card text-center">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                          <li class="nav-item">
+                              <a class="nav-link" href="categorias.php">Categorías Disponibles</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link active" aria-current="true" href="#">Categorías No disponibles</a>
+                          </li>                       
+                        </ul>
+
+                    </div>
+                    <div class="card-body">
+                    <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+
+                        try {
+
+                            //Limito la búsqueda de cada página
+                            $PAGS = 8;
+
+                            //inicializamos la página y el inicio para el límite de SQL
+                            $pagina = isset($_GET["pagina"]) ? $_GET["pagina"] : 1;
+                            $inicio = ($pagina - 1) * $PAGS;
+
+                            $con = new Conexion();
+                            $conexion = $con->conectar_db();
+
+                            $stmt = $conexion->prepare("SELECT * FROM servicios");
+                            $stmt->execute();
+                            //contar los registros y las páginas con la división entera
+                            $num_total_registros = $stmt->rowCount();
+                            $total_paginas = ceil($num_total_registros / $PAGS);
+
+                            $stmt = $conexion->prepare("SELECT * FROM categorias WHERE activo = 0 LIMIT ".$inicio."," .$PAGS);
+                            $stmt->execute();
+                            
+                            while ($res = $stmt->fetch(PDO::FETCH_OBJ)) {
+                                echo "<tr>";
+                                echo "<td>" . $res->codigo . "</td>";
+                                echo "<td>" . $res->nombre . "</td>";
+                                echo "<td><a href='activarcategoria.php?codigo=" . $res->codigo . "'><img class='imagen-tabla' src='./images/editar.png' alt='Editar'></a></td>";
+                               
+                                echo "</tr>";
+                                echo "</tr>";
+                            }
+                        echo "</table>";
+                            
+                        } catch (PDOException $e) {
+                            echo "Error al recuperar datos: " . $e->getMessage();
+
+                        }
+
+                        if ($total_paginas > 1) {
+                          for ($i = 1; $i <= $total_paginas; $i++) {
+                              if ($pagina == $i) {
+                                  // Si muestro el índice de la página actual, no coloco enlace
+                                  echo $pagina . " ";
+                              } else {
+                                  // Si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página
+                                  echo "<a href='categorias.php?pagina=$i'>$i</a> ";
+                              }
+                          }
+                      }
+
+?>
+                    </tbody>
+                    </table>
+                    </div>
+                </div> 
+                  <div class="col-12 col-sm-9 col-lg-10 mt-3"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
+                      <a href="nuevacategoria.php"><button class="button button-third" type="submit">Nueva Categoría</button></a>
+                  </div>
+            </div>
+          </div>
         </div>
       </section>
+    <?php
+        
+    }
+
+} catch (PDOException $e) {
+    echo "Error al recuperar datos: " . $e->getMessage();
+
+}
+
+?>
       <!-- Page Footer-->
       <footer class="section footer-minimal context-dark">
         <div class="container wow-outer">

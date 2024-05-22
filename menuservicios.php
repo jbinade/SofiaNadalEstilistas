@@ -1,41 +1,29 @@
 <?php
-
 include("seguridad.php");
+include("conectar_db.php");
 
 $rol = $_SESSION["rol"];
 
 if ($rol == "usuario") {
-  header("Location: index.php");
+    header("Location: index.php");
 }
 
+try {
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include("conectar_db.php");
-
+    $con = new Conexion();
+    $conexion = $con->conectar_db();
     $dni = $_SESSION["dni"];
-    
-   
 
-    try {
+    $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
+    $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+    $stmt->execute();
+    $res = $stmt->fetch(PDO::FETCH_OBJ);
 
-        $con = new Conexion();
-        $conexion = $con->conectar_db();
-        $stmt = $conexion->prepare('UPDATE clientes SET activo = 0 WHERE dni = :dni');
-        $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
-        $stmt->execute();
+} catch (PDOException $e) {
+    echo "Error al recuperar datos: " . $e->getMessage();
 
-        header("Location: salir.php");
-        
-    } catch(PDOException $e) {
-            echo 'Error al eliminar el cliente: ' . $e->getMessage();
-    }
-        
-      
 }
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
@@ -87,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="servicios.php">Servicios</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
                       </li>
@@ -99,27 +87,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </nav>
         </div>
       </header>
-    
- 
-      <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
+   
+    <section class="section section-lg bg-gray-1" id="contacts">
         <div class="container">
-              <h2 class="text-center text-sm-start">¿Desea eliminar la cuenta?</h2>
-              <!-- RD Mailform-->
-              <form class="form-login" method="post" action="eliminardatosAdmin.php">
-                <div class="row justify-content-between align-items-center">
-                    
-                            <!-- Los botones estarán en fila con espacio entre ellos en escritorio y tablet -->
-                            <div class="col-12 col-sm-3 col-lg-2"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                            <input class="button button-third mb-2 mb-sm-0 boton-login" type="submit">
-                            </div>
-                            <div class="col-12 col-sm-9 col-lg-10"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <a href="administracion.php"><button class="button button-third" type="submit">No, volver atrás</button></a>
-                            </div>
-                    
-                </div>
-            </form>
+            <div class="row justify-content-center justify-content-lg-center row-2-columns-bordered row-50 mt-5">
+            
+                <div class="card mx-3" style="width: 22rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Servicios</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="servicios.php" class="btn btn-primary">Servicios</a>
+                    </div>
+                </div>     
+
+                <div class="card mx-3" style="width: 22rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="categorias.php" class="btn btn-primary">Categorías</a>
+                    </div>
+                </div>     
+                
+            
+            </div>
         </div>
       </section>
+    
+        
+  
       <!-- Page Footer-->
       <footer class="section footer-minimal context-dark">
         <div class="container wow-outer">

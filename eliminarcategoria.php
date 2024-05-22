@@ -5,26 +5,33 @@ include("seguridad.php");
 $rol = $_SESSION["rol"];
 
 if ($rol == "usuario") {
-  header("Location: index.php");
+    header("Location: index.php");
 }
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include("conectar_db.php");
 
-    $dni = $_SESSION["dni"];
+    if(isset($_REQUEST["codigo"])) {
+        $codigo = $_REQUEST["codigo"];
+    }
     
-   
 
     try {
 
         $con = new Conexion();
         $conexion = $con->conectar_db();
-        $stmt = $conexion->prepare('UPDATE clientes SET activo = 0 WHERE dni = :dni');
-        $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+        $stmt = $conexion->prepare('UPDATE categorias SET activo = 0 WHERE codigo = :codigo');
+        $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
         $stmt->execute();
 
-        header("Location: salir.php");
+        $stmtServicios = $conexion->prepare('UPDATE servicios SET activo = 0 WHERE categoria = :categoria');
+        $stmtServicios->bindParam(':categoria', $codigo, PDO::PARAM_STR);
+        $stmtServicios->execute();
+
+
+
+        header("Location: categorias.php");
         
     } catch(PDOException $e) {
             echo 'Error al eliminar el cliente: ' . $e->getMessage();
@@ -35,7 +42,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
+<?php
+if(isset($_REQUEST["codigo"])) {
+    $codigo = $_REQUEST["codigo"];
 
+}
+?>
 
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
@@ -103,9 +115,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
       <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
         <div class="container">
-              <h2 class="text-center text-sm-start">¿Desea eliminar la cuenta?</h2>
+              <h2 class="text-center text-sm-start">¿Desea eliminar esta categoría?</h2>
               <!-- RD Mailform-->
-              <form class="form-login" method="post" action="eliminardatosAdmin.php">
+              <form class="form-login" method="post" action="eliminarcategoria.php?codigo=<?php echo $codigo; ?>">
                 <div class="row justify-content-between align-items-center">
                     
                             <!-- Los botones estarán en fila con espacio entre ellos en escritorio y tablet -->
@@ -113,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input class="button button-third mb-2 mb-sm-0 boton-login" type="submit">
                             </div>
                             <div class="col-12 col-sm-9 col-lg-10"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <a href="administracion.php"><button class="button button-third" type="submit">No, volver atrás</button></a>
+                                <a href="categorias.php"><button class="button button-third" type="submit">No, volver atrás</button></a>
                             </div>
                     
                 </div>

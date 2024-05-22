@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("conectar_db.php");
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +26,7 @@ session_start();
         <p>Loading...</p>
       </div>
     </div>
-    <div class="page">
+    <div class="page"> 
       <!-- Page Header-->
       <header class="section page-header header-login">
         <!-- RD Navbar-->
@@ -77,16 +78,15 @@ session_start();
                         </ul>
                     <?php
                     }
-
                     ?>
-                  <!-- </div> -->
+                  </div>
                 </div>
               </div>
             </div>
           </nav>
         </div>
       </header>
-    
+
       <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
             <div class="container">
                 <div class="row justify-content-between">
@@ -94,43 +94,55 @@ session_start();
                         <h2 class="text-center text-sm-start">Reserva ya tu cita</h2>
                     </div>
                     <div class="col-lg-12">
-                        <form class="form-login" method="post" action="conexion.php">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label for="categoria" class="text-center">Categoría:</label>
-                                    <select name="categoria" id="categoria" class="form-control mx-auto">
-                                        <option value="categoria1">Categoría 1</option>
-                                        <option value="categoria2">Categoría 2</option>
-                                        <option value="categoria3">Categoría 3</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label for="servicio" class="text-center">Servicio:</label>
-                                    <select name="servicio" id="servicio" class="form-control mx-auto">
-                                        <option value="servicio1">Servicio 1</option>
-                                        <option value="servicio2">Servicio 2</option>
-                                        <option value="servicio3">Servicio 3</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label for="empleado" class="text-center">Empleado:</label>
-                                    <select name="empleado" id="empleado" class="form-control mx-auto">
-                                        <option value="empleado1">Empleado 1</option>
-                                        <option value="empleado2">Empleado 2</option>
-                                        <option value="empleado3">Empleado 3</option>
-                                    </select>
-                                </div>
+                      <form class="form-login" method="post" id="form-reserva" action="horariocita.php">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label for="categoria" class="text-center">Categoría:</label>
+                                <select class="form-input" name="categoria" id="categoria" onchange="cargarServicios(this.value)">
+                                    <option value="">Selecciona una categoría</option>
+                                    <?php
+                                    $con = new Conexion();
+                                    $conexion = $con->conectar_db();
+                                    $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE activo = 1");
+                                    $stmtCategorias->execute();
+                                    while ($categoria = $stmtCategorias->fetch(PDO::FETCH_ASSOC)) {
+                                        echo '<option value="' . $categoria["codigo"] . '">' . $categoria["nombre"] . '</option>';
+                                    }
+                                    ?>
+                                </select>
                             </div>
-                            <div class="row justify-content-end">
-                                <div class="col-12 col-lg-2 text-right">
-                                    <a href="registro.php"><button class="button button-third" type="submit">Siguiente</button></a>
-                                </div>
+                            <div class="col-lg-4">
+                                <label for="servicio" class="text-center">Servicio:</label>
+                                <select class="form-input" name="servicio" id="servicio">
+                                    <option value="">Selecciona un servicio</option>
+                                </select>
                             </div>
-                        </form>
+                            <div class="col-lg-4">
+                                <label for="empleado" class="text-center">Empleado:</label>
+                                <select class="form-input" name="empleado" id="empleado">
+                                    <option value="">Selecciona un empleado</option>
+                                    <?php
+                                    $stmtEmpleado = $conexion->prepare("SELECT * FROM clientes WHERE activo = 1 AND rol = 'empleado'");
+                                    $stmtEmpleado->execute();
+                                    while ($empleado = $stmtEmpleado->fetch(PDO::FETCH_ASSOC)) {
+                                        echo '<option value="' . $empleado["nombre"] . " " . $empleado["apellidos"] . '">' . $empleado["nombre"]. " " . $empleado["apellidos"] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-12 col-lg-2 text-right">
+                                <button class="button button-third" type="submit">Siguiente</button>
+                            </div>
+                        </div>
+                      </form>
+
                     </div>                
                 </div>
             </div>
         </section>
+
       <!-- Page Footer-->
       <footer class="section footer-minimal context-dark">
         <div class="container wow-outer">
@@ -162,9 +174,8 @@ session_start();
       </footer>
     </div>
     <div class="snackbars" id="form-output-global"></div>
+    <script src="js/scripts.js"></script>
     <script src="js/core.min.js"></script>
-    <script src="js/script.js">
-      <!-- coded by dyoma-->
-    </script>
+    <script src="js/script.js"></script>
   </body>
-</html>
+</html> 

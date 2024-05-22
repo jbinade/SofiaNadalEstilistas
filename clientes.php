@@ -8,21 +8,7 @@ if ($rol == "usuario") {
   header("Location: index.php");
 }
 
-try {
 
-    $con = new Conexion();
-    $conexion = $con->conectar_db();
-    $dni = $_SESSION["dni"];
-
-    $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
-    $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
-    $stmt->execute();
-    $res = $stmt->fetch(PDO::FETCH_OBJ);
-
-} catch (PDOException $e) {
-    echo "Error al recuperar datos: " . $e->getMessage();
-
-}
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +61,7 @@ try {
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="servicios.php">Servicios</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
                       </li>
@@ -92,16 +78,7 @@ try {
 
 try {
 
-    $con = new Conexion();
-    $conexion = $con->conectar_db();
-    $dni = $_SESSION["dni"];
-
-    $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
-    $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
-    $stmt->execute();
-    $res = $stmt->fetch(PDO::FETCH_OBJ);
-
-    if ($res) {
+   
     ?>
     <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
         <div class="container">
@@ -121,7 +98,7 @@ try {
                               <a class="nav-link" href="empleados.php">Empleados</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link active" aria-current="true" href="clientes.php">Clientes</a>
+                              <a class="nav-link active" aria-current="true" href="#">Clientes</a>
                           </li>
                         </ul>
                     <?php
@@ -196,6 +173,18 @@ try {
 
                         }
 
+                        if ($total_paginas > 1) {
+                          for ($i = 1; $i <= $total_paginas; $i++) {
+                              if ($pagina == $i) {
+                                  // Si muestro el índice de la página actual, no coloco enlace
+                                  echo $pagina . " ";
+                              } else {
+                                  // Si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página
+                                  echo "<a href='clientes.php?pagina=$i'>$i</a> ";
+                              }
+                          }
+                        }
+
                         ?>
                     </tbody>
                     </table>
@@ -207,7 +196,7 @@ try {
       </section>
     <?php
         
-    }
+
 
 } catch (PDOException $e) {
     echo "Error al recuperar datos: " . $e->getMessage();

@@ -12,34 +12,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     include("conectar_db.php");
 
+    $con = new Conexion();
+
     //array para almacenar fallos
     $fallos = array();
 
-    $dni = $_REQUEST["dni"];
-    $email = $_REQUEST["email"];
+    $codigo = $_REQUEST["codigo"];
+    $categoria = $_REQUEST["categoria"];
     $nombre = $_REQUEST["nombre"];
-    $apellidos = $_REQUEST["apellidos"];
-    $telefono = $_REQUEST["telefono"];
+    $precio = $_REQUEST["precio"];
+    $descripcion = $_REQUEST["descripcion"];
 
     //verificar los campos
 
+    $conexion = $con->conectar_db();
+    $stmt = $conexion->prepare('SELECT * FROM servicios WHERE codigo = :codigo');
+    $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
+    $stmt->execute();
+    $res = $stmt->fetch(PDO::FETCH_OBJ);
+
+    $stmt = $conexion->prepare("SELECT * FROM categorias WHERE codigo = :codigo");
+    $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
+    $stmt->execute();
+    $res2 = $stmt->fetch(PDO::FETCH_OBJ);
+  
     if (empty($nombre)) {
         $fallos["nombre"] = "El nombre es obligatorio";
     }
 
-    if (empty($apellidos)) {
-        $fallos["apellidos"] = "Por favor, introduce el nombre completo";
+    if (empty($precio)) {
+        $fallos["precio"] = "El precio del artículo es obligatorio";
     }
 
-    if  (empty($telefono)) {
-        $fallos["telefono"] = "El teléfono es obligatorio";
-        
+    if (empty($categoria)) {
+        $fallos["categoria"] = "La categoria del artículo es obligatoria";
+    }
 
-    } else {
-
-        if (strlen($telefono) != 9 || !is_numeric($telefono)) {
-            $fallos["telefono"] = "Teléfono incorrecto";
-        }
+    if (empty($descripcion)) {
+        $fallos["descripcion"] = "La descripción del artículo es obligatoria";
     }
    
 
@@ -113,12 +123,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
       <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
         <div class="container">
-              <h2 class="text-center text-sm-start">Editar Cuenta</h2>
+              <h2 class="text-center text-sm-start">Editar Servicio</h2>
               <!-- RD Mailform-->
-                <form class="form-login" method="post" action="editarempleado.php">
+                <form class="form-login" method="post" action="editarservicio.php">
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="dni" type="text" name="dni" value="<?php echo $dni; ?>" readonly>
-                            <label class="form-label" for="dni">DNI</label>
+                            <input class="form-input" id="codigo" type="text" name="codigo" value="<?php echo $codigo; ?>" readonly>
+                            <label class="form-label" for="codigo">Código</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
                             <input class="form-input" id="nombre" type="text" name="nombre" value="<?php echo $nombre; ?>" data-constraints="@Required">
@@ -130,24 +140,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             ?>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="apellidos" type="text" name="apellidos" value="<?php echo $apellidos; ?>" data-constraints="@Required">
-                            <label class="form-label" for="apellidos">Apellidos</label>
+                            <input class="form-input" id="descripcion" type="text" name="descripcion" value="<?php echo $descripcion; ?>" data-constraints="@Required">
+                            <label class="form-label" for="descripcion">Descripción</label>
                             <?php 
-                                if (isset($fallos["apellidos"])) { 
-                                    echo "<span style='color: red;'>". $fallos["apellidos"]."</span>"; 
+                                if (isset($fallos["descripcion"])) { 
+                                    echo "<span style='color: red;'>". $fallos["descripcion"]."</span>"; 
                                 } 
                             ?>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="email" type="email" name="email" value="<?php echo $email; ?>" readonly>
-                            <label class="form-label" for="email">Email</label>
+                            <label class="form-label" for="categoria">Categoría</label>
+                            <select class="form-input" name="categoria" id="categoria">
+                                    <option value="<?php echo $res->categoria; ?>"><?php echo $res->nombre ?></option>
+                                    <?php
+                                    $conexion = $con->conectar_db();
+                                    $stmtCategorias = $conexion->prepare("SELECT * FROM categorias");
+                                    $stmtCategorias->execute();
+
+                                    while ($categoria = $stmtCategorias->fetch(PDO::FETCH_ASSOC)) {
+                                        echo '<option value="' . $categoria["codigo"] . '">' . $categoria["nombre"] . '</option>';
+                                    }
+                                    ?>
+                            </select>
+                            <?php 
+                                    if (isset($fallos["categoria"])) { 
+                                        echo "<span style='color: red;'>". $fallos["categoria"]."</span>"; 
+                                    } 
+                            ?>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="telefono" type="tel" name="telefono" pattern="[0-9]{9}" value="<?php echo $telefono; ?>" required>
-                            <label class="form-label" for="telefono">Teléfono</label>
+                            <input class="form-input" id="precio" type="number" name="precio" value="<?php echo $precio; ?>" data-constraints="@Required">
+                            <label class="form-label" for="precio">Precio</label>
                             <?php 
-                              if (isset($fallos["telefono"])) { 
-                                 echo "<span style='color: red;'>". $fallos["telefono"]."</span>"; 
+                              if (isset($fallos["precio"])) { 
+                                 echo "<span style='color: red;'>". $fallos["precio"]."</span>"; 
                               } 
                             ?>
                         </div>
@@ -158,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input class="button button-third mb-2 mb-sm-0 boton-login" type="submit">
                             </div>
                             <div class="col-12 col-sm-9 col-lg-10"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <a href="empleados.php"><button class="button button-third" type="submit">Volver</button></a>
+                                <a href="servicios.php"><button class="button button-third" type="submit">Volver</button></a>
                             </div>
                         </div>
                         
@@ -216,12 +242,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $con = new Conexion();
             $conexion = $con->conectar_db();
             $stmt = $conexion->prepare(
-                'UPDATE clientes SET nombre = :nombre, apellidos = :apellidos, telefono = :telefono WHERE dni = :dni');
+                'UPDATE servicios SET nombre = :nombre, descripcion = :descripcion, categoria = :categoria, precio = :precio WHERE codigo = :codigo');
         
-                $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+                $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
                 $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
-                $stmt->bindParam(':apellidos', $apellidos, PDO::PARAM_STR);
-                $stmt->bindParam(':telefono', $telefono, PDO::PARAM_STR);
+                $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
+                $stmt->bindParam(':categoria', $categoria, PDO::PARAM_STR);
+                $stmt->bindParam(':precio', $precio, PDO::PARAM_STR);
                         
                         
                 $stmt->execute();
@@ -230,7 +257,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo 'Error al actualizar el empleado: ' . $e->getMessage();
         }
         
-        header("Location: empleados.php");
+        header("Location: servicios.php");
 
     }
 
@@ -241,15 +268,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 
 include("conectar_db.php");
-if(isset($_REQUEST["dni"])) {
-    $dni = $_REQUEST["dni"];
+if(isset($_REQUEST["codigo"])) {
+    $codigo = $_REQUEST["codigo"];
 
 }
 
 $con = new Conexion();
 $conexion = $con->conectar_db();
-$stmt = $conexion->prepare('SELECT * FROM clientes WHERE dni = :dni');
-$stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+$stmt = $conexion->prepare('SELECT * FROM servicios WHERE codigo = :codigo');
+$stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
 $stmt->execute();
 
 $res = $stmt->fetch(PDO::FETCH_OBJ);
@@ -321,28 +348,39 @@ $res = $stmt->fetch(PDO::FETCH_OBJ);
  
       <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
         <div class="container">
-              <h2 class="text-center text-sm-start">Editar Cuenta</h2>
+              <h2 class="text-center text-sm-start">Editar Servicio</h2>
               <!-- RD Mailform-->
-                <form class="form-login" method="post" action="editarempleado.php">
+                <form class="form-login" method="post" action="editarservicio.php">
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="dni" type="text" name="dni" value="<?php echo $res->dni; ?>" readonly>
-                            <label class="form-label" for="dni">DNI</label>
+                            <input class="form-input" id="codigo" type="text" name="codigo" value="<?php echo $res->codigo; ?>" readonly>
+                            <label class="form-label" for="codigo">Código</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
                             <input class="form-input" id="nombre" type="text" name="nombre" value="<?php echo $res->nombre; ?>" required>
                             <label class="form-label" for="nombre">Nombre</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="apellidos" type="text" name="apellidos" value="<?php echo $res->apellidos; ?>" required>
-                            <label class="form-label" for="apellidos">Apellidos</label>
+                            <input class="form-input" id="descripcion" type="text" name="descripcion" value="<?php echo $res->descripcion; ?>" required>
+                            <label class="form-label" for="descripcion">Descripción</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="email" type="email" name="email" value="<?php echo $res->email; ?>" readonly>
-                            <label class="form-label" for="email">Email</label>
+                            <label class="form-label" for="categoria">Categoría</label>
+                            <select class="form-input" name="categoria" id="categoria">
+                                    <option value="<?php echo $res->categoria; ?>"><?php echo $res->nombre ?></option>
+                                    <?php
+                                    $conexion = $con->conectar_db();
+                                    $stmtCategorias = $conexion->prepare("SELECT * FROM categorias");
+                                    $stmtCategorias->execute();
+
+                                    while ($categoria = $stmtCategorias->fetch(PDO::FETCH_ASSOC)) {
+                                        echo '<option value="' . $categoria["codigo"] . '">' . $categoria["nombre"] . '</option>';
+                                    }
+                                    ?>
+                            </select>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="telefono" type="tel" name="telefono" pattern="[0-9]{9}" value="<?php echo $res->telefono; ?>" required>
-                            <label class="form-label" for="telefono">Teléfono</label>
+                            <input class="form-input" id="precio" type="number" name="precio"  value="<?php echo $res->precio; ?>" required>
+                            <label class="form-label" for="precio">Precio</label>
                         </div>
                         
                         <div class="row justify-content-between align-items-center">

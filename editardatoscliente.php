@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </li>
                             <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
                             </li>
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="servicios.php">Servicios</a>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                             </li>
                             <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
                             </li>
@@ -117,24 +117,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <!-- RD Mailform-->
                 <form class="form-login" method="post" action="editardatoscliente.php">
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="dni" type="text" name="dni" value="<?php echo $dni; ?>" disabled>
+                            <input class="form-input" id="dni" type="text" name="dni" value="<?php echo $dni; ?>" readonly>
                             <label class="form-label" for="dni">DNI</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
                             <input class="form-input" id="nombre" type="text" name="nombre" value="<?php echo $nombre; ?>" data-constraints="@Required">
                             <label class="form-label" for="nombre">Nombre</label>
+                            <?php 
+                                if (isset($fallos["nombre"])) { 
+                                    echo "<span style='color: red;'>". $fallos["nombre"]."</span>"; 
+                                } 
+                            ?>
                         </div>
                         <div class="form-wrap rd-form-2-2">
                             <input class="form-input" id="apellidos" type="text" name="apellidos" value="<?php echo $apellidos; ?>" data-constraints="@Required">
                             <label class="form-label" for="apellidos">Apellidos</label>
+                            <?php 
+                                if (isset($fallos["apellidos"])) { 
+                                    echo "<span style='color: red;'>". $fallos["apellidos"]."</span>"; 
+                                } 
+                            ?>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="email" type="email" name="email" value="<?php echo $email; ?>" disabled>
+                            <input class="form-input" id="email" type="email" name="email" value="<?php echo $email; ?>" readonly>
                             <label class="form-label" for="email">Email</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
                             <input class="form-input" id="telefono" type="tel" name="telefono" pattern="[0-9]{9}" value="<?php echo $telefono; ?>" required>
                             <label class="form-label" for="telefono">Teléfono</label>
+                            <?php 
+                              if (isset($fallos["telefono"])) { 
+                                 echo "<span style='color: red;'>". $fallos["telefono"]."</span>"; 
+                              } 
+                            ?>
                         </div>
                         
                         <div class="row justify-content-between align-items-center">
@@ -290,7 +305,7 @@ $res = $stmt->fetch(PDO::FETCH_OBJ);
                             </li>
                             <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
                             </li>
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="servicios.php">Servicios</a>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                             </li>
                             <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
                             </li>

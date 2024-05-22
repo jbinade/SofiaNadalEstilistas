@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </li>
                             <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
                             </li>
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="servicios.php">Servicios</a>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                             </li>
                             <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
                             </li>
@@ -285,7 +285,7 @@ $datos = $con->buscarCliente($dni);
                             </li>
                             <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
                             </li>
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="servicios.php">Servicios</a>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                             </li>
                             <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
                             </li>
