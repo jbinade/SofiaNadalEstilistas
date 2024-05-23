@@ -131,7 +131,7 @@ session_start();
               <div class="col-lg-12">
                 <div class="bunner-content-modern text-center">
                   <div class="big-text decorative-line wow fadeInUp" data-wow-delay=".075s">Fashion & style</div>
-                  <h5 class="wow fadeInUp" data-wow-delay="1s"> Curl Hair Salon, established in 1999, is an oasis of beauty, hair <br class="d-none d-lg-block"> indulgence, and the synonym of stylish haircuts.</h5>
+                  <a href="reservarCita.php"><button class="button button-secondary" type="submit">Reservar</button></a>
                 </div>
               </div>
             </div>

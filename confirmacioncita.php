@@ -1,3 +1,7 @@
+<?php
+include("seguridad.php");
+
+?>
 
 <html class="wide wow-animation" lang="en">
   <head>

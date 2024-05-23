@@ -1,5 +1,7 @@
 <?php
-include("seguridad.php");
+session_start();
+if (isset($_SESSION["rol"])) {
+
 include("conectar_db.php");
 // Asegúrate de que todas las variables estén correctamente definidas antes del uso
 $categoria = isset($_REQUEST["categoria"]) ? $_REQUEST["categoria"] : '';
@@ -8,6 +10,28 @@ $dniEmpleado = isset($_REQUEST["empleado"]) ? $_REQUEST["empleado"] : '';
 $fecha = isset($_REQUEST["fecha_seleccionada"]) ? $_REQUEST["fecha_seleccionada"] : '';
 $hora = isset($_REQUEST["hora_seleccionada"]) ? $_REQUEST["hora_seleccionada"] : '';
 $dni = $_SESSION["dni"];
+
+try {
+    $con = new Conexion();
+    $conexion = $con->conectar_db();
+
+    // Consultar si ya hay una reserva para el cliente en la hora y fecha seleccionadas
+    $stmtReserva = $conexion->prepare("SELECT * FROM citas WHERE codCliente = :codCliente AND fecha = :fecha AND hora = :hora");
+    $stmtReserva->bindParam(':codCliente', $dni, PDO::PARAM_STR);
+    $stmtReserva->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+    $stmtReserva->bindParam(':hora', $hora, PDO::PARAM_STR);
+    $stmtReserva->execute();
+    $reserva_existente = $stmtReserva->fetch(PDO::FETCH_ASSOC);
+
+    if ($reserva_existente) {
+        // Si hay una reserva existente, mostrar una alerta y redirigir a reservarCita.php
+        echo '<script>alert("Ya tienes una reserva para esta fecha y hora.");</script>';
+        echo '<script>window.location.href = "reservarCita.php";</script>';
+        exit();
+    }
+} catch (PDOException $e) {
+    echo "Error al consultar la reserva: " . $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
@@ -87,10 +111,7 @@ $dni = $_SESSION["dni"];
 
                         <div class="table-responsive">
                             <table class="table">
-                                <tr>
-                                    <th>Empleado</th>
-                                    <td><?php echo $dniEmpleado; ?></td>
-                                </tr>
+                               
                                 <tr>
                                     <th>Servicio Seleccionado</th>
                                     <td><?php echo $resServicio->nombre; ?></td>
@@ -117,8 +138,16 @@ $dni = $_SESSION["dni"];
                             <input type="hidden" name="fecha" value="<?php echo $fecha; ?>">
                             <input type="hidden" name="hora" value="<?php echo $hora; ?>">
                             <input type="hidden" name="precio" value="<?php echo $resServicio->precio; ?>">
-                            <button class="button button-third" type="submit">Confirmar Cita</button>
+                            
+                            
+                            <div class="col-12 col-sm-9 col-lg-10">
+                                 <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
+                                <button class="button button-third" type="submit">Confirmar Cita</button> 
+                                <a href="reservarCita.php"><button class="button button-third" type="submit">Volver</button></a>
+                            </div>
                         </form>
+
+                        
                     </div>
                 </div>
             </div>
@@ -162,3 +191,11 @@ $dni = $_SESSION["dni"];
     <script src="js/script.js"></script>
 </body>
 </html>
+
+<?php
+} else {
+
+    header("Location: login.php");
+
+}
+?>

@@ -96,7 +96,7 @@ include("conectar_db.php");
                     <div class="col-lg-12">
                       <form class="form-login" method="post" id="form-reserva" action="horariocita.php">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <label for="categoria" class="text-center">Categoría:</label>
                                 <select class="form-input" name="categoria" id="categoria" onchange="cargarServicios(this.value)">
                                     <option value="">Selecciona una categoría</option>
@@ -111,24 +111,24 @@ include("conectar_db.php");
                                     ?>
                                 </select>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <label for="servicio" class="text-center">Servicio:</label>
                                 <select class="form-input" name="servicio" id="servicio">
                                     <option value="">Selecciona un servicio</option>
                                 </select>
                             </div>
-                            <div class="col-lg-4">
+                            <!-- <div class="col-lg-4">
                                 <label for="empleado" class="text-center">Empleado:</label>
                                 <select class="form-input" name="empleado" id="empleado">
                                     <option value="">Selecciona un empleado</option>
                                     <?php
-                                    $stmtEmpleado = $conexion->prepare("SELECT * FROM clientes WHERE activo = 1 AND rol = 'empleado'");
-                                    $stmtEmpleado->execute();
-                                    while ($empleado = $stmtEmpleado->fetch(PDO::FETCH_ASSOC)) {
-                                        echo '<option value="' . $empleado["nombre"] . " " . $empleado["apellidos"] . '">' . $empleado["nombre"]. " " . $empleado["apellidos"] . '</option>';
-                                    }
-                                    ?>
-                                </select>
+                                    //$stmtEmpleado = $conexion->prepare("SELECT * FROM clientes WHERE activo = 1 AND rol = 'empleado'");
+                                    //$stmtEmpleado->execute();
+                                    //while ($empleado = $stmtEmpleado->fetch(PDO::FETCH_ASSOC)) {
+                                        //echo '<option value="' . $empleado["nombre"] . " " . $empleado["apellidos"] . '">' . $empleado["nombre"]. " " . $empleado["apellidos"] . '</option>';
+                                    //} -->
+                                    ?> -->
+                                <!-- </select> -->
                             </div>
                         </div>
                         <div class="row justify-content-end">
