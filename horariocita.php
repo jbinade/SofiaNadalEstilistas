@@ -24,7 +24,7 @@ function obtener_horas_reservadas() {
     $fecha_actual = date('Y-m-d');
     
     // Preparar la consulta para contar las reservas por cada hora, incluyendo la fecha
-    $stmt = $conexion->query("SELECT CONCAT(fecha, ' ', hora) as fecha_hora, COUNT(*) as total_reservas FROM citas WHERE fecha >= '$fecha_actual' GROUP BY fecha_hora");
+    $stmt = $conexion->query("SELECT CONCAT(fecha, ' ', hora) as fecha_hora, COUNT(*) as total_reservas FROM citas WHERE fecha >= '$fecha_actual' AND activo = 1 GROUP BY fecha_hora");
     $horas_reservadas = [];
     
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -224,8 +224,9 @@ for ($i = 0; $i < $dias; $i++) {
             });
         });
     </script>
-</body>
-</html>
+<?php
+        include("footer.php");
+      ?>
 
 
 

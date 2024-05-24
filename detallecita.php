@@ -16,7 +16,7 @@ try {
     $conexion = $con->conectar_db();
 
     // Consultar si ya hay una reserva para el cliente en la hora y fecha seleccionadas
-    $stmtReserva = $conexion->prepare("SELECT * FROM citas WHERE codCliente = :codCliente AND fecha = :fecha AND hora = :hora");
+    $stmtReserva = $conexion->prepare("SELECT * FROM citas WHERE codCliente = :codCliente AND fecha = :fecha AND hora = :hora AND activo = 1");
     $stmtReserva->bindParam(':codCliente', $dni, PDO::PARAM_STR);
     $stmtReserva->bindParam(':fecha', $fecha, PDO::PARAM_STR);
     $stmtReserva->bindParam(':hora', $hora, PDO::PARAM_STR);
@@ -158,39 +158,9 @@ try {
             echo "Error al recuperar datos: " . $e->getMessage();
         }
         ?>
-        <footer class="section footer-minimal context-dark">
-            <div class="container wow-outer">
-                <div class="wow fadeIn">
-                    <div class="row row-50">
-                        <div class="col-12">
-                            <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
-                        </div>
-                        <div class="col-12">
-                            <ul class="footer-minimal-nav">
-                                <li><a href="index.php">Inicio</a></li>
-                                <li><a href="reservarCita.php">Reservar Cita</a></li>
-                                <li><a href="registro.php">Registrarse</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-12">
-                            <ul class="social-list">
-                                <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
-                                <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
-                                <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-twitter" href="#"></a></li>
-                                <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-google-plus" href="#"></a></li>
-                                <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-vimeo" href="#"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-    <div class="snackbars" id="form-output-global"></div>
-    <script src="js/core.min.js"></script>
-    <script src="js/script.js"></script>
-</body>
-</html>
+    <?php
+        include("footer.php");
+      ?>
 
 <?php
 } else {

@@ -12,20 +12,22 @@ if ($rol == "usuario") {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include("conectar_db.php");
 
-    if(isset($_REQUEST["dni"])) {
-        $dni = $_REQUEST["dni"];
+    if(isset($_REQUEST["idCita"])) {
+        $idCita = $_REQUEST["idCita"];
     }
     
+    $estado = "realizada";
 
     try {
 
         $con = new Conexion();
         $conexion = $con->conectar_db();
-        $stmt = $conexion->prepare('UPDATE clientes SET activo = 0 WHERE dni = :dni');
-        $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+        $stmt = $conexion->prepare('UPDATE citas SET estado = :estado WHERE idCita = :idCita');
+        $stmt->bindParam(':idCita', $idCita, PDO::PARAM_STR);
+        $stmt->bindParam(':estado', $estado, PDO::PARAM_STR);
         $stmt->execute();
 
-        header("Location: clientes.php");
+        header("Location: misreservas.php");
         
     } catch(PDOException $e) {
             echo 'Error al eliminar el cliente: ' . $e->getMessage();
@@ -37,10 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <?php
-if(isset($_REQUEST["dni"])) {
-    $dni = $_REQUEST["dni"];
+if(isset($_REQUEST["idCita"])) {
+    $idCita = $_REQUEST["idCita"];
 
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +94,7 @@ if(isset($_REQUEST["dni"])) {
                     <ul class="rd-navbar-nav">
                       <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administración</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Reservas</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                       </li>
@@ -109,9 +112,9 @@ if(isset($_REQUEST["dni"])) {
  
       <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
         <div class="container">
-              <h2 class="text-center text-sm-start">¿Desea eliminar la cuenta?</h2>
+              <h2 class="text-center text-sm-start">¿Se ha realizado la cita?</h2>
               <!-- RD Mailform-->
-              <form class="form-login" method="post" action="eliminardatoscliente.php?dni=<?php echo $dni; ?>">
+              <form class="form-login" method="post" action="estadocita.php?idCita=<?php echo $idCita; ?>">
                 <div class="row justify-content-between align-items-center">
                     
                             <!-- Los botones estarán en fila con espacio entre ellos en escritorio y tablet -->
@@ -119,7 +122,7 @@ if(isset($_REQUEST["dni"])) {
                             <input class="button button-third mb-2 mb-sm-0 boton-login" type="submit">
                             </div>
                             <div class="col-12 col-sm-9 col-lg-10"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <a href="clientes.php"><button class="button button-third" type="submit">No, volver atrás</button></a>
+                                <a href="misreservas.php"><button class="button button-third" type="submit">No, volver atrás</button></a>
                             </div>
                     
                 </div>

@@ -69,7 +69,7 @@ session_start();
                         <ul class="rd-navbar-nav">
                           <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administración</a>
                           </li>
-                          <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Reservas</a>
                           </li>
                           <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                           </li>
@@ -85,7 +85,7 @@ session_start();
                         <ul class="rd-navbar-nav">
                           <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administración</a>
                           </li>
-                          <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Reservas</a>
                           </li>
                           <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                           </li>
@@ -354,98 +354,8 @@ session_start();
         </div>
       </section>
       
-      <section class="section section-lg bg-gray-1" id="contacts">
-        <div class="container">
-          <div class="row justify-content-left justify-content-lg-between row-2-columns-bordered row-50">
-            <div class="col-md-10 col-lg-4">
-              <h2 class="text-center text-sm-start">CONTACTS</h2>
-              <div class="row-md-6 row-lg-4">
-                <div class="box-icon-modern">
-                  <div class="box-icon-inner decorate-triangle decorate-color-primary-light"><span class="icon-xl linearicons-phone-incoming icon-gray-800"></span></div>
-                  <div class="box-icon-caption">
-                    <h4><a href="#">1-800-123-1234</a></h4>
-                    <p>You can call us anytime</p>
-                  </div>
-                </div>
-              </div>
-              <div class="row-md-6 row-lg-4">
-                <div class="box-icon-modern">
-                  <div class="box-icon-inner decorate-circle decorate-color-primary-light"><span class="icon-xl linearicons-map2 icon-gray-800"></span></div>
-                  <div class="box-icon-caption">
-                    <h4><a href="#">51 Francis Street, Darlinghurst NSW 2010, United States</a></h4>
-                  </div>
-                </div>
-              </div>
-              <div class="row-md-6 row-lg-4">
-                <div class="box-icon-modern">
-                  <div class="box-icon-inner decorate-rectangle decorate-color-primary-light"><span class="icon-xl linearicons-paper-plane icon-gray-800"></span></div>
-                  <div class="box-icon-caption">
-                    <h4><a href="#">info@demolink.org</a></h4>
-                    <p>Feel free to email us your questions</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-10 col-lg-7">
-              <h2 class="text-center text-sm-start">GET IN TOUCH</h2>
-              <!-- RD Mailform-->
-              <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
-                <div class="form-wrap rd-form-2-2">
-                  <input class="form-input" id="contact-name" type="text" name="name" data-constraints="@Required">
-                  <label class="form-label" for="contact-name">Name</label>
-                </div>
-                <div class="form-wrap rd-form-2-2">
-                  <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Email @Required">
-                  <label class="form-label" for="contact-email">Email</label>
-                </div>
-                <div class="form-wrap rd-form-2-2">
-                  <label class="form-label" for="contact-message"> Message</label>
-                  <textarea class="form-input" id="contact-message" name="message" data-constraints="@Required"></textarea>
-                </div>
-                <div class="row justify-content-left">
-                  <div class="col-12 col-sm-7 col-lg-5">
-                    <button class="button button-third" type="submit">Send Message</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+      
       <!-- Page Footer-->
-      <footer class="section footer-minimal context-dark">
-        <div class="container wow-outer">
-          <div class="wow fadeIn">
-            <div class="row row-50">
-              <div class="col-12">
-                <!-- Brand<a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-250x111.png" alt="" width="250" height="111"/><img class="brand-logo-light" src="images/logo-inverse-250x111.png" alt="" width="250" height="111"/></a> -->
-                <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
-              </div>
-              <div class="col-12">
-                <ul class="footer-minimal-nav">
-                  <li><a href="#">Pricing</a></li>
-                  <li><a href="#contacts">Contacts</a></li>
-                  <li><a href="#gallery">Gallery</a></li>
-                  <li><a href="#">About</a></li>
-                </ul>
-              </div>
-              <div class="col-12">
-                <ul class="social-list">
-                  <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
-                  <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
-                  <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
-                </ul>
-              </div>
-            </div>
-            <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Sofía Nadal Estilistas</span><span>.&nbsp;</span><span>Todos los derechos reservados.</span><span>&nbsp;</span></p>
-          </div>
-        </div>
-      </footer>
-    </div>
-    <div class="snackbars" id="form-output-global"></div>
-    <script src="js/core.min.js"></script>
-    <script src="js/script.js">
-      <!-- coded by dyoma-->
-    </script>
-  </body>
-</html>
+      <?php
+        include("footer.php");
+      ?>
