@@ -100,8 +100,6 @@ session_start();
                         // Si no está autenticado, incluye el formulario de inicio de sesión
                     ?>
                         <ul class="rd-navbar-nav">
-                          <li class="rd-nav-item"><a class="rd-nav-link" href="#contacts">Contacto</a>
-                          </li>
                           <li class="rd-nav-item"><a class="rd-nav-link" href="reservarCita.php">Reservar Cita</a>
                           </li>
                           <li class="rd-nav-item"><a class="rd-nav-link" href="registro.php">Registrarse</a>
@@ -144,8 +142,8 @@ session_start();
           <div class="row justify-content-center text-center">
             <div class="col-md-9 col-lg-7 wow-outer">
               <div class="wow slideInDown">
-                <h2>Featured Offers</h2>
-                <p>We offer a complete range of hair services including haircuts & styling, coloring, eyebrow <br class="d-none d-lg-block"> and eyelash tinting, perming, hair straightening, and a lot more.</p>
+                <h2>Servicios Destacados</h2>
+                <p>Ofrecemos una gama completa de servicios para el cabello que incluyen cortes y peinados,<br class="d-none d-lg-block"> coloración, alisado del cabello y mucho más..</p>
               </div>
             </div>
           </div>
@@ -155,12 +153,12 @@ session_start();
                 <div class="team-minimal">
                   <div class="team-minimal-figure"><img src="images/team-minimal-1-370x395.jpg" alt="" width="370" height="395"/>
                     <ul class="team-minimal-soc-list">
-                      <li><a class="button button-sm button-secondary" href="#">book now</a></li>
+                      <li><a class="button button-sm button-secondary" href="#">Reservar</a></li>
                     </ul>
                   </div>
                   <div class="team-minimal-caption">
-                    <h4 class="text-uppercase"><a class="team-name" href="#">haircuts</a></h4>
-                    <h6 class="text-primary text-uppercase">Creating Your Image </h6>
+                    <h4 class="text-uppercase"><a class="team-name" href="#">Cortes de pelo</a></h4>
+                    <h6 class="text-primary text-uppercase">Creando tu imagen </h6>
                   </div>
                 </div>
               </div>
@@ -174,8 +172,8 @@ session_start();
                     </ul>
                   </div>
                   <div class="team-minimal-caption">
-                    <h4 class="text-uppercase"><a class="team-name" href="#">hairstyles</a></h4>
-                    <h6 class="text-primary text-uppercase">Achieving the Best Look</h6>
+                    <h4 class="text-uppercase"><a class="team-name" href="#">Peinados</a></h4>
+                    <h6 class="text-primary text-uppercase">Consigue tu mejor look</h6>
                   </div>
                 </div>
               </div>
@@ -189,8 +187,8 @@ session_start();
                     </ul>
                   </div>
                   <div class="team-minimal-caption">
-                    <h4 class="text-uppercase"><a class="team-name" href="#">Coloring</a></h4>
-                    <h6 class="text-primary text-uppercase">Any Colors You Can Imagine</h6>
+                    <h4 class="text-uppercase"><a class="team-name" href="#">Coloración</a></h4>
+                    <h6 class="text-primary text-uppercase">Cualquier color que puedas imaginar</h6>
                   </div>
                 </div>
               </div>
@@ -202,8 +200,8 @@ session_start();
       <section class="section section-lg section-lg-1 bg-default" id="gallery">
         <div class="row justify-content-center text-center">
           <div class="col-12 wow slideInUp">
-            <h2>Our Portfolio</h2>
-            <div class="small-text">Check out the full portfolio of our works including haircuts, hair extensions, and<br class="d-none d-lg-block"> more. Everything you see here was performed by our stylists and hairdressers.</div>
+            <h2>Nuestros Trabajos</h2>
+            <div class="small-text">Consulte nuestros trabajos que incluyen cortes de cabello, extensiones de cabello y<br class="d-none d-lg-block"> más. Todo lo que ves aquí fue realizado por nuestros estilistas y peluqueros.</div>
           </div>
         </div>
         <div class="row row-30" data-isotope-group="gallery">
@@ -276,9 +274,9 @@ session_start();
             </div>
             <div class="col-lg-5 wow-outer block-1 text-center text-lg-start">
               <div class="wow slideInRight">
-                <h2>About Us</h2>
-                <p class="p1">Curl is one of the premier hair salons in Los Angeles, frequented not only by women but by men and kids as well.</p>
-                <p>Our hair salon has earned an incredible reputation as our professional team of hairstylists continues to work wonders on clients’ hair and enhance their assets through our services.</p>
+                <h2>Sobre Nosotros</h2>
+                <p class="p1">Sofía Nadal Estilistas es uno de los salones de belleza más importantes de la provincia de Alicante, frecuentado no solo por mujeres sino también por hombres y niños.</p>
+                <p>Con una experiencia de más de 20 años, nuestro salón de belleza se ha ganado una reputación increíble ya que nuestro equipo profesional de estilistas continúa haciendo maravillas en el cabello de los clientes.</p>
               </div>
             </div>
           </div>
@@ -294,7 +292,7 @@ session_start();
           <div class="container">
             <div class="wow-outer">
               <div class="wow slideInDown">
-                <h2>Testimonials</h2>
+                <h2>Experiencias</h2>
               </div>
             </div>
             <!-- Slick Carousel-->
@@ -302,33 +300,33 @@ session_start();
               <div class="item">
                 <div class="testimonials-modern">
                   <div class="testimonials-modern-text">
-                    <p>Janette cut my hair and did partial highlights and my experience was excellent! She took her time doing my hair and I am very pleased with the results. If you are still looking where to have your hair cut the best way, head for Curl !</p>
+                    <p>¡Mi experiencia fue increíble! Me cortaron el pelo y me hicieron mechas parciales tomando el tiempo necesario para peinarme. Sin duda estoy muy satisfecha con el resultado obtenido. </p>
                   </div>
-                  <div class="testimonials-modern-name">Kate Wilson</div>
+                  <div class="testimonials-modern-name">Laura</div>
                 </div>
               </div>
               <div class="item">
                 <div class="testimonials-modern">
                   <div class="testimonials-modern-text">
-                    <p>Lauren made my hair look the best it's ever looked. My mom and I were in for the weekend out of town and decided to get our hair done. I knew I wanted to try something new with my hair, and your stylist was so accommodating and a joy to be around.</p>
+                    <p>¡Mi pelo luce mejor que nunca! Quería probar algo nuevo y sin duda en Sofía Nadal acertaron de lleno. He quedado muy encantada con el resultado. Tengo claro que volveré! </p>
                   </div>
-                  <div class="testimonials-modern-name">Julia Parker</div>
+                  <div class="testimonials-modern-name">Julia</div>
                 </div>
               </div>
               <div class="item">
                 <div class="testimonials-modern">
                   <div class="testimonials-modern-text">
-                    <p>There are hair salons, and there's Curl , a team of true hair experts. Being from NYC, I've been to many well-known salons and I've never had a better experience. Stylists here listen to you and ensure that you always leave with what you have asked for.</p>
+                    <p>Después de acudir a varios salones, puedo decir que he tenido la mejor experiencia. Los estilistas aquí te escuchan y se aseguran de que siempre salgas con lo que has pedido.</p>
                   </div>
-                  <div class="testimonials-modern-name">Susan	Davis</div>
+                  <div class="testimonials-modern-name">Susana</div>
                 </div>
               </div>
               <div class="item">
                 <div class="testimonials-modern">
                   <div class="testimonials-modern-text">
-                    <p>I've been coming here for years and I can confidently say that Curl  is the best hair salon that is also very consistent with the quality of service and hair color. Besides great hairstyling experience, you can also enjoy a unique and friendly atmosphere at this salon.</p>
+                    <p>Llevo años viniendo aquí y puedo decir con confianza que Sofía Nadal es la mejor peluquería y que además es muy consistente con la calidad del servicio y el color del cabello.</p>
                   </div>
-                  <div class="testimonials-modern-name">Anne	Jackson</div>
+                  <div class="testimonials-modern-name">Ana</div>
                 </div>
               </div>
             </div>
@@ -356,6 +354,37 @@ session_start();
       
       
       <!-- Page Footer-->
-      <?php
-        include("footer.php");
-      ?>
+      <footer class="section footer-minimal context-dark">
+            <div class="container wow-outer">
+            <div class="wow fadeIn">
+                <div class="row row-50">
+                <div class="col-12">
+                    <!-- Brand<a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-250x111.png" alt="" width="250" height="111"/><img class="brand-logo-light" src="images/logo-inverse-250x111.png" alt="" width="250" height="111"/></a> -->
+                    <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
+                </div>
+                <div class="col-12">
+                    <ul class="footer-minimal-nav">
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="reservarCita.php">Reservar Cita</a></li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <ul class="social-list">
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
+                    </ul>
+                </div>
+                </div>
+                <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Sofía Nadal Estilistas</span><span>.&nbsp;</span><span>Todos los derechos reservados.</span><span>&nbsp;</span></p>
+            </div>
+            </div>
+        </footer>
+        </div>
+        <div class="snackbars" id="form-output-global"></div>
+        <script src="js/core.min.js"></script>
+        <script src="js/script.js">
+        
+        </script>
+    </body>
+    </html>

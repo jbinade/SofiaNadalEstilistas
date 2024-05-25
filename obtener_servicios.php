@@ -1,4 +1,5 @@
 <?php
+
 include("conectar_db.php");
 
 if (isset($_POST['categoria']) && !empty($_POST['categoria'])) {

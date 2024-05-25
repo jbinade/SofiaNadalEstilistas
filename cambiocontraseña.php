@@ -1,5 +1,12 @@
 <?php
 
+if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
+  // Redirigir a index.php
+  header("Location: index.php");
+  exit; // Asegura que el script se detenga después de la redirección
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -64,79 +71,38 @@
       </header>
     
  
-      <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
-        <div class="container">
-          <div class="row justify-content-left justify-content-lg-between row-2-columns-bordered row-50">
-            <div class="col-md-10 col-lg-4">
-              <h2 class="text-center text-sm-start">CONTACTO</h2>
-              <div class="row-md-6 row-lg-4">
-                <div class="box-icon-modern">
-                  <div class="box-icon-inner decorate-triangle decorate-color-primary-light"><span class="icon-xl linearicons-phone-incoming icon-gray-800"></span></div>
-                  <div class="box-icon-caption">
-                    <h4><a href="#">633 444 111</a></h4>
-                    <p>Contacta con nosotros en nuestro horario de 10:00 a 19:00</p>
-                  </div>
+        <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
+            <div class="container">
+                <div class="row justify-content-left justify-content-lg-between row-2-columns-bordered row-50">
+    
+                    <div class="col-md-10 col-lg-12">
+                        <h2 class="text-center text-sm-start">Nueva Contraseña</h2>
+                        <!-- RD Mailform-->
+                            <form class="form-login" method="post" action="actualizarcontraseña.php">
+                                <div class="form-wrap rd-form-2-2">
+                                    <input class="form-input" id="dni" type="text" name="dni" required>
+                                    <label class="form-label" for="email">DNI</label>
+                                </div>
+                                <div class="form-wrap rd-form-2-2">
+                                        <input class="form-input" id="email" type="email" name="email" required>
+                                        <label class="form-label" for="email">Email</label>
+                                </div>
+                                        
+                                        
+                                <div class="row justify-content-between align-items-center">
+                                            <!-- Los botones estarán en fila con espacio entre ellos en escritorio y tablet -->
+                                    <div class="col-12 col-sm-2"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
+                                        <input class="button button-third mb-2 mb-sm-0 boton-login" type="submit">
+                                    </div>
+                                    <div class="col-12 col-sm-10"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
+                                        <a href="index.php"><button class="button button-third" type="submit">Cancelar</button></a>
+                                    </div>
+                                </div>
+                            </form>
+                    </div>
                 </div>
-              </div>
-              <div class="row-md-6 row-lg-4">
-                <div class="box-icon-modern">
-                  <div class="box-icon-inner decorate-circle decorate-color-primary-light"><span class="icon-xl linearicons-map2 icon-gray-800"></span></div>
-                  <div class="box-icon-caption">
-                    <h4><a href="#">C/ Mayor 35, 03160 Almoradí, Alicante</a></h4>
-                  </div>
-                </div>
-              </div>
-              <div class="row-md-6 row-lg-4">
-                <div class="box-icon-modern">
-                  <div class="box-icon-inner decorate-rectangle decorate-color-primary-light"><span class="icon-xl linearicons-paper-plane icon-gray-800"></span></div>
-                  <div class="box-icon-caption">
-                    <h4><a href="#">snestilistas@correo.com</a></h4>
-                    <p>Email de contacto para cualquier duda o sugerencia</p>
-                  </div>
-                </div>
-              </div>
             </div>
-            <div class="col-md-10 col-lg-7">
-              <h2 class="text-center text-sm-start">INICIAR SESIÓN</h2>
-              <!-- RD Mailform-->
-                <form class="form-login" method="post" action="conexion.php">
-                        <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="email" type="email" name="email" data-constraints="@Email @Required">
-                            <label class="form-label" for="email">Email</label>
-                            </div>
-                            <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="contrasena" type="password" name="contrasena" data-constraints="@Required">
-                            <label class="form-label" for="contrasena">Contraseña</label>
-                            </div>
-                        
-                        <!-- <div class="row justify-content-left">
-                        <div class="col-12 col-sm-7 col-lg-5">
-                            <button class="button button-third" type="submit">Enviar</button>
-                            <button class="button button-third" type="submit">Registrarse</button>
-                        </div>
-                        </div> -->
-                        <?php
-                            if (isset($_GET['error']) && $_GET['error'] == 1) {
-                                echo '<p class="mensaje-login">Datos Incorrectos</p>';
-                            }
-                        ?>
-                        <div class="row justify-content-between align-items-center">
-                            <!-- Los botones estarán en fila con espacio entre ellos en escritorio y tablet -->
-                            <div class="col-12 col-sm-3"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <input class="button button-third mb-2 mb-sm-0 boton-login" type="submit">
-                            </div>
-                            <div class="col-12 col-sm-4"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <a href="registro.php"><button class="button button-third" type="submit">Registrarse</button></a>
-                            </div>
-                            <div class="col-12 col-sm-5"> <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <a href="cambiocontraseña.php"><button class="button button-third" type="submit">Actualizar Contraseña</button></a>
-                            </div>
-                        </div>
-                </form>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
       <!-- Page Footer-->
       <footer class="section footer-minimal context-dark">
             <div class="container wow-outer">
@@ -168,7 +134,7 @@
         <div class="snackbars" id="form-output-global"></div>
         <script src="js/core.min.js"></script>
         <script src="js/script.js">
-        
+        <!-- coded by dyoma-->
         </script>
     </body>
     </html>

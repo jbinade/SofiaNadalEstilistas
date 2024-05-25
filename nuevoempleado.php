@@ -5,7 +5,7 @@ include("conectar_db.php");
 
 $rol = $_SESSION["rol"];
 
-if ($rol == "usuario") {
+if ($rol == "usuario" || $rol == "empleado") {
     header("Location: index.php");
 }
 
@@ -199,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <ul class="rd-navbar-nav">
                                     <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administracion</a>
                                     </li>
-                                    <li class="rd-nav-item"><a class="rd-nav-link" href="reservas.php">Reservas</a>
+                                    <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Reservas</a>
                                     </li>
                                     <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                                     </li>
@@ -224,7 +224,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <!-- RD Mailform-->
                             <form class="form-login" method="post" action="registro.php">
                                     <div class="form-wrap rd-form-2-2">
-                                        <input class="form-input" id="dni" type="text" name="dni" value="<?php echo $dni; ?>" data-constraints="@Required">
+                                        <input class="form-input" id="dni" type="text" name="dni" value="<?php echo $dni; ?>" required>
                                         <label class="form-label" for="dni">DNI</label>
                                         <?php 
                                             if (isset($fallos["dni"])) { 
@@ -233,7 +233,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         ?>
                                     </div>
                                     <div class="form-wrap rd-form-2-2">
-                                        <input class="form-input" id="nombre" type="text" name="nombre" value="<?php echo $nombre;?>" data-constraints="@Required">
+                                        <input class="form-input" id="nombre" type="text" name="nombre" value="<?php echo $nombre;?>" required>
                                         <label class="form-label" for="nombre">Nombre</label>
                                         <?php 
                                             if (isset($fallos["nombre"])) { 
@@ -242,7 +242,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         ?>
                                     </div>
                                     <div class="form-wrap rd-form-2-2">
-                                        <input class="form-input" id="apellidos" type="text" name="apellidos" value="<?php echo $apellidos;?>" data-constraints="@Required">
+                                        <input class="form-input" id="apellidos" type="text" name="apellidos" value="<?php echo $apellidos;?>" required>
                                         <label class="form-label" for="apellidos">Apellidos</label>
                                         <?php 
                                             if (isset($fallos["apellidos"])) { 
@@ -251,7 +251,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         ?>
                                     </div>
                                     <div class="form-wrap rd-form-2-2">
-                                        <input class="form-input" id="email" type="email" name="email" value="<?php echo $email; ?>" data-constraints="@Email @Required">
+                                        <input class="form-input" id="email" type="email" name="email" value="<?php echo $email; ?>" required>
                                         <label class="form-label" for="email">Email</label>
                                         <?php 
                                             if (isset($fallos["email"])) { 
@@ -260,7 +260,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         ?>
                                     </div>
                                     <div class="form-wrap rd-form-2-2">
-                                        <input class="form-input" id="contrasena" type="password" name="contrasena" value="<?php echo $contrasena; ?>" data-constraints="@Required">
+                                        <input class="form-input" id="contrasena" type="password" name="contrasena" value="<?php echo $contrasena; ?>" required>
                                         <label class="form-label" for="contrasena">Contraseña</label>
                                         <?php 
                                             if (isset($fallos["contrasena"])) { 
@@ -289,9 +289,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </section>
                 <!-- Page Footer-->
-                <?php
-                    include("footer.php");
-                ?>
+                <footer class="section footer-minimal context-dark">
+                    <div class="container wow-outer">
+                    <div class="wow fadeIn">
+                        <div class="row row-50">
+                        <div class="col-12">
+                            <!-- Brand<a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-250x111.png" alt="" width="250" height="111"/><img class="brand-logo-light" src="images/logo-inverse-250x111.png" alt="" width="250" height="111"/></a> -->
+                            <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
+                        </div>
+                        <div class="col-12">
+                            <ul class="footer-minimal-nav">
+                            <li><a href="index.php">Inicio</a></li>
+                            <li><a href="reservarCita.php">Reservar Cita</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-12">
+                            <ul class="social-list">
+                            <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                            <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                            <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Sofía Nadal Estilistas</span><span>.&nbsp;</span><span>Todos los derechos reservados.</span><span>&nbsp;</span></p>
+                    </div>
+                    </div>
+                </footer>
+                </div>
+        <div class="snackbars" id="form-output-global"></div>
+        <script src="js/core.min.js"></script>
+        <script src="js/script.js">
+        
+        </script>
+    </body>
+    </html>
         
 <?php
         
@@ -394,7 +425,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <ul class="rd-navbar-nav">
                       <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administracion</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="reservas.php">Reservas</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Reservas</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                       </li>
@@ -419,23 +450,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <!-- RD Mailform-->
                 <form class="form-login" method="post" action="nuevoempleado.php">
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="dni" type="text" name="dni" data-constraints="@Required">
+                            <input class="form-input" id="dni" type="text" name="dni" required>
                             <label class="form-label" for="dni">DNI</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="nombre" type="text" name="nombre" data-constraints="@Required">
+                            <input class="form-input" id="nombre" type="text" name="nombre" required>
                             <label class="form-label" for="nombre">Nombre</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="apellidos" type="text" name="apellidos" data-constraints="@Required">
+                            <input class="form-input" id="apellidos" type="text" name="apellidos" required>
                             <label class="form-label" for="apellidos">Apellidos</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="email" type="email" name="email" data-constraints="@Email @Required">
+                            <input class="form-input" id="email" type="email" name="email" required>
                             <label class="form-label" for="email">Email</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="contrasena" type="password" name="contrasena" data-constraints="@Required">
+                            <input class="form-input" id="contrasena" type="password" name="contrasena" required>
                             <label class="form-label" for="contrasena">Contraseña</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
@@ -455,6 +486,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </section>
       <!-- Page Footer-->
-      <?php
-        include("footer.php");
-      ?>
+      <footer class="section footer-minimal context-dark">
+            <div class="container wow-outer">
+            <div class="wow fadeIn">
+                <div class="row row-50">
+                <div class="col-12">
+                    <!-- Brand<a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-250x111.png" alt="" width="250" height="111"/><img class="brand-logo-light" src="images/logo-inverse-250x111.png" alt="" width="250" height="111"/></a> -->
+                    <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
+                </div>
+                <div class="col-12">
+                    <ul class="footer-minimal-nav">
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="reservarCita.php">Reservar Cita</a></li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <ul class="social-list">
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
+                    </ul>
+                </div>
+                </div>
+                <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Sofía Nadal Estilistas</span><span>.&nbsp;</span><span>Todos los derechos reservados.</span><span>&nbsp;</span></p>
+            </div>
+            </div>
+        </footer>
+        </div>
+        <div class="snackbars" id="form-output-global"></div>
+        <script src="js/core.min.js"></script>
+        <script src="js/script.js">
+        
+        </script>
+    </body>
+    </html>

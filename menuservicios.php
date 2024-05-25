@@ -73,7 +73,7 @@ try {
                     <ul class="rd-navbar-nav">
                       <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administración</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Reservas</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="servicios.php">Servicios</a>
                       </li>
@@ -92,21 +92,21 @@ try {
         <div class="container">
             <div class="row justify-content-center justify-content-lg-center row-2-columns-bordered row-50 mt-5">
             
-                <div class="card mx-3" style="width: 22rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                <div class="card mx-4" style="width: 25rem;">
+                    <img src="images/servicios.jpg" class="card-img-top imagen-servicios mt-3" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Servicios</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="servicios.php" class="btn btn-primary">Servicios</a>
+                        <p class="card-text mb-3">Ver los servicios disponibles y no disponibles, modificar y dar de baja servicios, así como dar de alta nuevos.</p>
+                        <a href="servicios.php"><button class="button button-third" type="submit">Servicios</button></a>
                     </div>
                 </div>     
 
-                <div class="card mx-3" style="width: 22rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                <div class="card mx-4" style="width: 25rem;">
+                    <img src="images/categorias.jpg" class="card-img-top imagen-servicios mt-3" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="categorias.php" class="btn btn-primary">Categorías</a>
+                        <h5 class="card-title">Categorías</h5>
+                        <p class="card-text mb-3">Ver las categorías disponibles y no disponibles, modificar y dar de baja categorías, así como dar de alta nuevas.</p>
+                        <a href="categorias.php"><button class="button button-third" type="submit">Categorías</button></a>
                     </div>
                 </div>     
                 
@@ -118,6 +118,37 @@ try {
         
   
       <!-- Page Footer-->
-      <?php
-        include("footer.php");
-      ?>
+      <footer class="section footer-minimal context-dark">
+            <div class="container wow-outer">
+            <div class="wow fadeIn">
+                <div class="row row-50">
+                <div class="col-12">
+                    <!-- Brand<a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-250x111.png" alt="" width="250" height="111"/><img class="brand-logo-light" src="images/logo-inverse-250x111.png" alt="" width="250" height="111"/></a> -->
+                    <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
+                </div>
+                <div class="col-12">
+                    <ul class="footer-minimal-nav">
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="reservarCita.php">Reservar Cita</a></li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <ul class="social-list">
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
+                    </ul>
+                </div>
+                </div>
+                <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Sofía Nadal Estilistas</span><span>.&nbsp;</span><span>Todos los derechos reservados.</span><span>&nbsp;</span></p>
+            </div>
+            </div>
+        </footer>
+        </div>
+        <div class="snackbars" id="form-output-global"></div>
+        <script src="js/core.min.js"></script>
+        <script src="js/script.js">
+        
+        </script>
+    </body>
+    </html>

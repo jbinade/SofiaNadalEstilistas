@@ -37,14 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     
         $conexion = $con->conectar_db();
-        // $stmt = $conexion->prepare("SELECT * FROM categorias WHERE LEFT(nombre, 3) = :categoriaCodigo");
-        // $stmt->bindParam(':categoriaCodigo', $categoriaCodigo, PDO::PARAM_STR);
-        // $stmt->execute();
+        $stmt = $conexion->prepare("SELECT * FROM categorias WHERE LEFT(nombre, 3) = :categoriaCodigo");
+        $stmt->bindParam(':categoriaCodigo', $categoriaCodigo, PDO::PARAM_STR);
+        $stmt->execute();
 
-        // if ($stmt->rowCount() == 0) {
-        //     // Si no se ha encontrado ninguna categoría con las tres primeras letras del código muestro mensaje 
-        //     $fallos["codigo"] = "Código Incorrecto";
-        // } else {
+        if ($stmt->rowCount() == 0) {
+             // Si no se ha encontrado ninguna categoría con las tres primeras letras del código muestro mensaje 
+            $fallos["codigo"] = "Código Incorrecto";
+        } else {
             // Si se ha encontrado una categoría con las tres primeras letras del código se verifica si existe o no
             $stmt = $conexion->prepare("SELECT * FROM servicios WHERE codigo = :codigo");
             $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <ul class="rd-navbar-nav">
                                     <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administracion</a>
                                     </li>
-                                    <li class="rd-nav-item"><a class="rd-nav-link" href="reservas.php">Reservas</a>
+                                    <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Reservas</a>
                                     </li>
                                     <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                                     </li>
@@ -164,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     ?>
                                 </div>
                                 <div class="form-wrap rd-form-2-2">
-                                    <input class="form-input" id="nombre" type="text" name="nombre" value="<?php echo $nombre; ?>" data-constraints="@Required">
+                                    <input class="form-input" id="nombre" type="text" name="nombre" value="<?php echo $nombre; ?>" required>
                                     <label class="form-label" for="nombre">Nombre</label>
                                     <?php 
                                         if (isset($fallos["nombre"])) { 
@@ -173,7 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     ?>
                                 </div>
                                 <div class="form-wrap rd-form-2-2">
-                                    <input class="form-input" id="descripcion" type="text" name="descripcion" value="<?php echo $descripcion; ?>" data-constraints="@Required">
+                                    <input class="form-input" id="descripcion" type="text" name="descripcion" value="<?php echo $descripcion; ?>" required>
                                     <label class="form-label" for="descripcion">Descripción</label>
                                     <?php 
                                         if (isset($fallos["descripcion"])) { 
@@ -202,7 +202,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     ?>
                                 </div>
                                 <div class="form-wrap rd-form-2-2">
-                                    <input class="form-input" id="precio" type="number" name="precio" value="<?php echo $precio; ?>" data-constraints="@Required">
+                                    <input class="form-input" id="precio" type="number" name="precio" value="<?php echo $precio; ?>" required>
                                     <label class="form-label" for="precio">Precio</label>
                                     <?php 
                                     if (isset($fallos["precio"])) { 
@@ -222,9 +222,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </section>
                 <!-- Page Footer-->
-                <?php
-                  include("footer.php");
-                ?>
+                <footer class="section footer-minimal context-dark">
+                    <div class="container wow-outer">
+                    <div class="wow fadeIn">
+                        <div class="row row-50">
+                        <div class="col-12">
+                            <!-- Brand<a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-250x111.png" alt="" width="250" height="111"/><img class="brand-logo-light" src="images/logo-inverse-250x111.png" alt="" width="250" height="111"/></a> -->
+                            <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
+                        </div>
+                        <div class="col-12">
+                            <ul class="footer-minimal-nav">
+                            <li><a href="index.php">Inicio</a></li>
+                            <li><a href="reservarCita.php">Reservar Cita</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-12">
+                            <ul class="social-list">
+                            <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                            <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                            <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Sofía Nadal Estilistas</span><span>.&nbsp;</span><span>Todos los derechos reservados.</span><span>&nbsp;</span></p>
+                    </div>
+                    </div>
+                </footer>
+                </div>
+        <div class="snackbars" id="form-output-global"></div>
+        <script src="js/core.min.js"></script>
+        <script src="js/script.js">
+        
+        </script>
+    </body>
+    </html>
         
 <?php
         
@@ -324,7 +355,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <ul class="rd-navbar-nav">
                       <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administracion</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="reservas.php">Reservas</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Reservas</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                       </li>
@@ -349,15 +380,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <!-- RD Mailform-->
                 <form class="form-login" method="post" action="nuevoservicio.php">
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="codigo" type="text" name="codigo" data-constraints="@Required">
+                            <input class="form-input" id="codigo" type="text" name="codigo" required>
                             <label class="form-label" for="codigo">Código</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="nombre" type="text" name="nombre" data-constraints="@Required">
+                            <input class="form-input" id="nombre" type="text" name="nombre" required>
                             <label class="form-label" for="nombre">Nombre</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="descripcion" type="text" name="descripcion" data-constraints="@Required">
+                            <input class="form-input" id="descripcion" type="text" name="descripcion" required>
                             <label class="form-label" for="descripcion">Descripción</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
@@ -379,7 +410,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </select>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="precio" type="number" name="precio" data-constraints="@Required">
+                            <input class="form-input" id="precio" type="number" name="precio" required>
                             <label class="form-label" for="precio">Precio</label>
                         </div>
                         
@@ -396,6 +427,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </section>
       <!-- Page Footer-->
-      <?php
-        include("footer.php");
-      ?>
+      <footer class="section footer-minimal context-dark">
+            <div class="container wow-outer">
+            <div class="wow fadeIn">
+                <div class="row row-50">
+                <div class="col-12">
+                    <!-- Brand<a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-250x111.png" alt="" width="250" height="111"/><img class="brand-logo-light" src="images/logo-inverse-250x111.png" alt="" width="250" height="111"/></a> -->
+                    <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
+                </div>
+                <div class="col-12">
+                    <ul class="footer-minimal-nav">
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="reservarCita.php">Reservar Cita</a></li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <ul class="social-list">
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
+                    </ul>
+                </div>
+                </div>
+                <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Sofía Nadal Estilistas</span><span>.&nbsp;</span><span>Todos los derechos reservados.</span><span>&nbsp;</span></p>
+            </div>
+            </div>
+        </footer>
+        </div>
+        <div class="snackbars" id="form-output-global"></div>
+        <script src="js/core.min.js"></script>
+        <script src="js/script.js">
+        
+        </script>
+    </body>
+    </html>

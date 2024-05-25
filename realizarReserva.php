@@ -4,7 +4,7 @@ include("seguridad.php");
 include("conectar_db.php");
 
 $dni = $_SESSION["dni"];
-$estado = "Pendiente";
+$estado = "Confirmada";
 $activo = 1;
 
 

@@ -2,7 +2,9 @@
 include("seguridad.php");
 include("conectar_db.php");
 
-
+if ($rol !== "usuario") {
+  header("Location: index.php");
+}
 
 try {
 
@@ -138,7 +140,7 @@ try {
                         <a href="eliminarmicuenta.php" class="d-block mb-3"><button class="button button-third" type="submit">Eliminar Cuenta</button></a>
                     </div>
                     <div class="col-12 d-block d-sm-none"> <!-- Se mostrará en filas diferentes en xs y sm -->
-                        <a href="actualizarcotraseña.php" class="d-block mb-3"><button class="button button-third" type="submit">Actualizar Contraseña</button></a>
+                        <a href="resetpassword.php" class="d-block mb-3"><button class="button button-third" type="submit">Actualizar Contraseña</button></a>
                     </div>
 
                     <!-- Para tamaños de pantalla medianos (md) y grandes (lg) -->
@@ -149,7 +151,7 @@ try {
                         <a href="eliminarmicuenta.php" class="d-block"><button class="button button-third" type="submit">Eliminar Cuenta</button></a>
                     </div>
                     <div class="col-sm-4 d-none d-sm-block"> <!-- Se mostrará en la misma fila en md y lg -->
-                        <a href="actualizarcontraseña.php" class="d-block"><button class="button button-third" type="submit">Actualizar Contraseña</button></a>
+                        <a href="resetpassword.php" class="d-block"><button class="button button-third" type="submit">Actualizar Contraseña</button></a>
                     </div>
                 </div>
             </div>
@@ -167,6 +169,37 @@ try {
 
 ?>
       <!-- Page Footer-->
-      <?php
-        include("footer.php");
-      ?>
+      <footer class="section footer-minimal context-dark">
+            <div class="container wow-outer">
+            <div class="wow fadeIn">
+                <div class="row row-50">
+                <div class="col-12">
+                    <!-- Brand<a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-250x111.png" alt="" width="250" height="111"/><img class="brand-logo-light" src="images/logo-inverse-250x111.png" alt="" width="250" height="111"/></a> -->
+                    <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
+                </div>
+                <div class="col-12">
+                    <ul class="footer-minimal-nav">
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="reservarCita.php">Reservar Cita</a></li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <ul class="social-list">
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
+                    </ul>
+                </div>
+                </div>
+                <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Sofía Nadal Estilistas</span><span>.&nbsp;</span><span>Todos los derechos reservados.</span><span>&nbsp;</span></p>
+            </div>
+            </div>
+        </footer>
+        </div>
+        <div class="snackbars" id="form-output-global"></div>
+        <script src="js/core.min.js"></script>
+        <script src="js/script.js">
+        
+        </script>
+    </body>
+    </html>

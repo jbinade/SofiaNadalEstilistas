@@ -187,15 +187,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="rd-navbar-nav-wrap">
                                 <!-- RD Navbar Nav-->
                                 <ul class="rd-navbar-nav">
-                                <li class="rd-nav-item"><a class="rd-nav-link" href="#about">About</a>
-                                </li>
-                                <li class="rd-nav-item"><a class="rd-nav-link" href="#pricing">Pricing</a>
-                                </li>
-                                <li class="rd-nav-item"><a class="rd-nav-link" href="#contacts">Contacts</a>
-                                </li>
-                                <li class="rd-nav-item"><a class="rd-nav-link" href="login.php">Login</a>
-                                </li>
-                                </ul>
+                                    <li class="rd-nav-item"><a class="rd-nav-link" href="reservarCita.php">Reservar Cita</a>
+                                    </li>
+                                    <li class="rd-nav-item"><a class="rd-nav-link" href="registro.php">Registrarse</a>
+                                    </li>
+                                    <li class="rd-nav-item"><a class="rd-nav-link" href="login.php">Login</a>
+                                    </li>
+                                    </ul>
                             <!-- </div> -->
                             </div>
                         </div>
@@ -242,7 +240,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <!-- RD Mailform-->
                             <form class="form-login" method="post" action="registro.php">
                                     <div class="form-wrap rd-form-2-2">
-                                        <input class="form-input" id="dni" type="text" name="dni" value="<?php echo $dni; ?>" data-constraints="@Required">
+                                        <input class="form-input" id="dni" type="text" name="dni" value="<?php echo $dni; ?>" required>
                                         <label class="form-label" for="dni">DNI</label>
                                         <?php 
                                             if (isset($fallos["dni"])) { 
@@ -251,7 +249,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         ?>
                                     </div>
                                     <div class="form-wrap rd-form-2-2">
-                                        <input class="form-input" id="nombre" type="text" name="nombre" value="<?php echo $nombre;?>" data-constraints="@Required">
+                                        <input class="form-input" id="nombre" type="text" name="nombre" value="<?php echo $nombre;?>" required>
                                         <label class="form-label" for="nombre">Nombre</label>
                                         <?php 
                                             if (isset($fallos["nombre"])) { 
@@ -260,7 +258,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         ?>
                                     </div>
                                     <div class="form-wrap rd-form-2-2">
-                                        <input class="form-input" id="apellidos" type="text" name="apellidos" value="<?php echo $apellidos;?>" data-constraints="@Required">
+                                        <input class="form-input" id="apellidos" type="text" name="apellidos" value="<?php echo $apellidos;?>" required>
                                         <label class="form-label" for="apellidos">Apellidos</label>
                                         <?php 
                                             if (isset($fallos["apellidos"])) { 
@@ -269,7 +267,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         ?>
                                     </div>
                                     <div class="form-wrap rd-form-2-2">
-                                        <input class="form-input" id="email" type="email" name="email" value="<?php echo $email; ?>" data-constraints="@Email @Required">
+                                        <input class="form-input" id="email" type="email" name="email" value="<?php echo $email; ?>" required>
                                         <label class="form-label" for="email">Email</label>
                                         <?php 
                                             if (isset($fallos["email"])) { 
@@ -278,7 +276,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         ?>
                                     </div>
                                     <div class="form-wrap rd-form-2-2">
-                                        <input class="form-input" id="contrasena" type="password" name="contrasena" value="<?php echo $contrasena; ?>" data-constraints="@Required">
+                                        <input class="form-input" id="contrasena" type="password" name="contrasena" value="<?php echo $contrasena; ?>" required>
                                         <label class="form-label" for="contrasena">Contraseña</label>
                                         <?php 
                                             if (isset($fallos["contrasena"])) { 
@@ -298,9 +296,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </section>
                 <!-- Page Footer-->
-                <?php
-                  include("footer.php");
-                ?>
+                <footer class="section footer-minimal context-dark">
+                    <div class="container wow-outer">
+                    <div class="wow fadeIn">
+                        <div class="row row-50">
+                        <div class="col-12">
+                            <!-- Brand<a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-250x111.png" alt="" width="250" height="111"/><img class="brand-logo-light" src="images/logo-inverse-250x111.png" alt="" width="250" height="111"/></a> -->
+                            <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
+                        </div>
+                        <div class="col-12">
+                            <ul class="footer-minimal-nav">
+                            <li><a href="index.php">Inicio</a></li>
+                            <li><a href="reservarCita.php">Reservar Cita</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-12">
+                            <ul class="social-list">
+                            <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                            <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                            <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Sofía Nadal Estilistas</span><span>.&nbsp;</span><span>Todos los derechos reservados.</span><span>&nbsp;</span></p>
+                    </div>
+                    </div>
+                </footer>
+                </div>
+        <div class="snackbars" id="form-output-global"></div>
+        <script src="js/core.min.js"></script>
+        <script src="js/script.js">
+        
+        </script>
+    </body>
+    </html>
         
 <?php
         
@@ -398,11 +427,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <div class="rd-navbar-nav-wrap">
                     <!-- RD Navbar Nav-->
                     <ul class="rd-navbar-nav">
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="#about">About</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="reservarCita.php">Reservar Cita</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="#pricing">Pricing</a>
-                      </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="#contacts">Contacts</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="registro.php">Registrarse</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="login.php">Login</a>
                       </li>
@@ -425,8 +452,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="box-icon-modern">
                   <div class="box-icon-inner decorate-triangle decorate-color-primary-light"><span class="icon-xl linearicons-phone-incoming icon-gray-800"></span></div>
                   <div class="box-icon-caption">
-                    <h4><a href="#">1-800-123-1234</a></h4>
-                    <p>You can call us anytime</p>
+                    <h4><a href="#">633 444 111</a></h4>
+                    <p>Contacta con nosotros en nuestro horario de 10:00 a 19:00</p>
                   </div>
                 </div>
               </div>
@@ -434,7 +461,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="box-icon-modern">
                   <div class="box-icon-inner decorate-circle decorate-color-primary-light"><span class="icon-xl linearicons-map2 icon-gray-800"></span></div>
                   <div class="box-icon-caption">
-                    <h4><a href="#">51 Francis Street, Darlinghurst NSW 2010, United States</a></h4>
+                    <h4><a href="#">C/ Mayor 35, 03160 Almoradí, Alicante</a></h4>
                   </div>
                 </div>
               </div>
@@ -442,8 +469,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="box-icon-modern">
                   <div class="box-icon-inner decorate-rectangle decorate-color-primary-light"><span class="icon-xl linearicons-paper-plane icon-gray-800"></span></div>
                   <div class="box-icon-caption">
-                    <h4><a href="#">info@demolink.org</a></h4>
-                    <p>Feel free to email us your questions</p>
+                    <h4><a href="#">snestilistas@correo.com</a></h4>
+                    <p>Email de contacto para cualquier duda o sugerencia</p>
                   </div>
                 </div>
               </div>
@@ -453,23 +480,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <!-- RD Mailform-->
                 <form class="form-login" method="post" action="registro.php">
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="dni" type="text" name="dni" data-constraints="@Required">
+                            <input class="form-input" id="dni" type="text" name="dni" required>
                             <label class="form-label" for="dni">DNI</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="nombre" type="text" name="nombre" data-constraints="@Required">
+                            <input class="form-input" id="nombre" type="text" name="nombre" required>
                             <label class="form-label" for="nombre">Nombre</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="apellidos" type="text" name="apellidos" data-constraints="@Required">
+                            <input class="form-input" id="apellidos" type="text" name="apellidos" required>
                             <label class="form-label" for="apellidos">Apellidos</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="email" type="email" name="email" data-constraints="@Email @Required">
+                            <input class="form-input" id="email" type="email" name="email" required>
                             <label class="form-label" for="email">Email</label>
                         </div>
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="contrasena" type="password" name="contrasena" data-constraints="@Required">
+                            <input class="form-input" id="contrasena" type="password" name="contrasena" required>
                             <label class="form-label" for="contrasena">Contraseña</label>
                         </div>
                         
@@ -485,6 +512,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </section>
       <!-- Page Footer-->
-      <?php
-        include("footer.php");
-      ?>
+      <footer class="section footer-minimal context-dark">
+            <div class="container wow-outer">
+            <div class="wow fadeIn">
+                <div class="row row-50">
+                <div class="col-12">
+                    <!-- Brand<a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-250x111.png" alt="" width="250" height="111"/><img class="brand-logo-light" src="images/logo-inverse-250x111.png" alt="" width="250" height="111"/></a> -->
+                    <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
+                </div>
+                <div class="col-12">
+                    <ul class="footer-minimal-nav">
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="reservarCita.php">Reservar Cita</a></li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <ul class="social-list">
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
+                    </ul>
+                </div>
+                </div>
+                <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Sofía Nadal Estilistas</span><span>.&nbsp;</span><span>Todos los derechos reservados.</span><span>&nbsp;</span></p>
+            </div>
+            </div>
+        </footer>
+        </div>
+        <div class="snackbars" id="form-output-global"></div>
+        <script src="js/core.min.js"></script>
+        <script src="js/script.js">
+        
+        </script>
+    </body>
+    </html>

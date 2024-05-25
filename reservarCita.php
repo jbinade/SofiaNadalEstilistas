@@ -50,6 +50,8 @@ include("conectar_db.php");
                     <!-- RD Navbar Nav-->
                     <?php
                     if (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] === true) {
+
+                      if (($_SESSION["rol"] == "usuario")) {
                     ?>
                         
                         <ul class="rd-navbar-nav">
@@ -63,21 +65,53 @@ include("conectar_db.php");
                           </li>
                         </ul>
                     <?php
+                      } else if(($_SESSION["rol"] == "administrador")) {
+                    
+                    ?>
+                        <ul class="rd-navbar-nav">
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administración</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Reservas</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
+                          </li>
+                        </ul>
+                      
+
+
+                    <?php
+                      } else {
+                    ?>
+                        <ul class="rd-navbar-nav">
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administración</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Reservas</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="salir.php">Salir</a>
+                          </li>
+                        </ul>
+                    <?php
+
+                      }
+
                     } else {
                         // Si no está autenticado, incluye el formulario de inicio de sesión
                     ?>
                         <ul class="rd-navbar-nav">
-                          <li class="rd-nav-item"><a class="rd-nav-link" href="#about">About</a>
-                          </li>
                           <li class="rd-nav-item"><a class="rd-nav-link" href="reservarCita.php">Reservar Cita</a>
                           </li>
-                          <li class="rd-nav-item"><a class="rd-nav-link" href="#contacts">Contacto</a>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="registro.php">Registrarse</a>
                           </li>
                           <li class="rd-nav-item"><a class="rd-nav-link" href="login.php">Login</a>
                           </li>
                         </ul>
                     <?php
                     }
+
                     ?>
                   </div>
                 </div>
@@ -117,19 +151,8 @@ include("conectar_db.php");
                                     <option value="">Selecciona un servicio</option>
                                 </select>
                             </div>
-                            <!-- <div class="col-lg-4">
-                                <label for="empleado" class="text-center">Empleado:</label>
-                                <select class="form-input" name="empleado" id="empleado">
-                                    <option value="">Selecciona un empleado</option>
-                                    <?php
-                                    //$stmtEmpleado = $conexion->prepare("SELECT * FROM clientes WHERE activo = 1 AND rol = 'empleado'");
-                                    //$stmtEmpleado->execute();
-                                    //while ($empleado = $stmtEmpleado->fetch(PDO::FETCH_ASSOC)) {
-                                        //echo '<option value="' . $empleado["nombre"] . " " . $empleado["apellidos"] . '">' . $empleado["nombre"]. " " . $empleado["apellidos"] . '</option>';
-                                    //} -->
-                                    ?> -->
-                                <!-- </select> -->
-                            </div>
+                            
+                            
                         </div>
                         <div class="row justify-content-end">
                             <div class="col-12 col-lg-2 text-right">
@@ -144,6 +167,38 @@ include("conectar_db.php");
         </section>
 
       <!-- Page Footer-->
-      <?php
-        include("footer.php");
-      ?>
+        <footer class="section footer-minimal context-dark">
+            <div class="container wow-outer">
+            <div class="wow fadeIn">
+                <div class="row row-50">
+                <div class="col-12">
+                    <!-- Brand<a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-default-250x111.png" alt="" width="250" height="111"/><img class="brand-logo-light" src="images/logo-inverse-250x111.png" alt="" width="250" height="111"/></a> -->
+                    <a class="nuevo-brand-2" href="index.php">Sofía Nadal Estilistas</a>
+                </div>
+                <div class="col-12">
+                    <ul class="footer-minimal-nav">
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="reservarCita.php">Reservar Cita</a></li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <ul class="social-list">
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
+                    </ul>
+                </div>
+                </div>
+                <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Sofía Nadal Estilistas</span><span>.&nbsp;</span><span>Todos los derechos reservados.</span><span>&nbsp;</span></p>
+            </div>
+            </div>
+        </footer>
+        </div>
+        <div class="snackbars" id="form-output-global"></div>
+        <script src="js/core.min.js"></script>
+        <script src="js/script.js">
+       
+        </script>
+        <script src="js/scripts.js"></script>
+    </body>
+    </html>
