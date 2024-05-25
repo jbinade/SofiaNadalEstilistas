@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Si ya existe un artículo con el mismo código muestro mensaje
                 $fallos["codigo"] = "El código ya se encuentra en la base de datos";
             }
-        // }
+        }
     } catch(PDOException $e) {
         echo 'Error al verificar el código: ' . $e->getMessage();
     }
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <!DOCTYPE html>
             <html class="wide wow-animation" lang="en">
             <head>
-                <title>Home</title>
+                <title>SNEstilistas</title>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -259,7 +259,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
 <?php
         
-            } else {
+    } else {
                 
                 try {
 
@@ -301,8 +301,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo 'Error al insertar el cliente: ' . $e->getMessage();
                 }
         
-            }
+    }
+
 }
+
 
 ?>
 
@@ -310,7 +312,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
   <head>
-    <title>Home</title>
+    <title>SNEstilistas</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
