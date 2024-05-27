@@ -73,7 +73,7 @@ try {
                     <ul class="rd-navbar-nav">
                       <li class="rd-nav-item"><a class="rd-nav-link" href="administracion.php">Administración</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="reservascliente.php">Reservas</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="misreservas.php">Reservas</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="menuservicios.php">Servicios</a>
                       </li>

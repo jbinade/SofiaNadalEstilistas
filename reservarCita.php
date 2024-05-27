@@ -154,6 +154,11 @@ include("conectar_db.php");
                             
                             
                         </div>
+                        <?php
+                            if (isset($_GET['campos']) && $_GET['campos'] == 1) {
+                                echo '<p class="mensaje-login">Los campos son obligatorios</p>';
+                            }
+                        ?>
                         <div class="row justify-content-end">
                             <div class="col-12 col-lg-2 text-right">
                                 <button class="button button-third" type="submit">Siguiente</button>

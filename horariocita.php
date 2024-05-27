@@ -34,9 +34,14 @@ function obtener_horas_reservadas() {
     return $horas_reservadas;
 }
 
+$categoria = $_REQUEST["categoria"];
+$servicio = $_REQUEST["servicio"];
 
-$categoria = isset($_REQUEST["categoria"]) ? $_REQUEST["categoria"] : '';
-$servicio = isset($_REQUEST["servicio"]) ? $_REQUEST["servicio"] : '';
+if (empty($categoria) || empty($servicio)) {
+    header("Location: reservarCita.php?campos=1");
+    exit;
+}
+
 
 $dias = 14;
 $horario_inicio = '10:00:00';

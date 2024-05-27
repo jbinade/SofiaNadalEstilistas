@@ -2,6 +2,8 @@
 include("seguridad.php");
 include("conectar_db.php");
 
+$rol = $_SESSION["rol"];
+
 if ($rol !== "usuario") {
   header("Location: index.php");
 }
