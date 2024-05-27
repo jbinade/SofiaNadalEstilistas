@@ -168,7 +168,7 @@ session_start();
                 <div class="team-minimal">
                   <div class="team-minimal-figure"><img src="images/team-minimal-2-370x395.jpg" alt="" width="370" height="395"/>
                     <ul class="team-minimal-soc-list">
-                      <li><a class="button button-sm button-secondary" href="#">book now</a></li>
+                      <li><a class="button button-sm button-secondary" href="#">Reservar</a></li>
                     </ul>
                   </div>
                   <div class="team-minimal-caption">
@@ -183,7 +183,7 @@ session_start();
                 <div class="team-minimal">
                   <div class="team-minimal-figure"><img src="images/team-minimal-3-370x395.jpg" alt="" width="370" height="395"/>
                     <ul class="team-minimal-soc-list">
-                      <li><a class="button button-sm button-secondary" href="#">book now</a></li>
+                      <li><a class="button button-sm button-secondary" href="#">Reservar</a></li>
                     </ul>
                   </div>
                   <div class="team-minimal-caption">
