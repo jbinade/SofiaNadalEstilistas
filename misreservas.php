@@ -141,6 +141,7 @@ if ($rol == "usuario") {
                                         echo "<td>" . $resServicio->nombre . "</td>";
                                     }
                                     echo "<td>" . $res->total . ".-€" . "</td>";
+                                    echo "<td>" . $res->pagado . ".-€" . "</td>";
                                     echo "</tr>";
                                 }
                     
@@ -363,6 +364,7 @@ if ($rol == "usuario") {
                                         echo "<td>" . $resServicio->nombre . "</td>";
                                     }
                                     echo "<td>" . $res->total . ".-€" . "</td>";
+                                    echo "<td>" . $res->pagado . ".-€" . "</td>";
                                     echo "<td><a href='estadocita.php?idCita=" . $res->idCita . "'><img class='imagen-tabla' src='./images/editar.png' alt='Editar'></a></td>";
                                     echo "<td><a href='eliminarcita.php?idCita=" . $res->idCita . "'><img class='imagen-tabla' src='./images/borrar.jpg' alt='Borrar'></a></td>";
                                     echo "</tr>";

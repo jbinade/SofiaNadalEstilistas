@@ -1,37 +1,12 @@
 <?php
 include("seguridad.php");
-if (isset($_SESSION["rol"])) {
 
-include("conectar_db.php");
-// Asegúrate de que todas las variables estén correctamente definidas antes del uso
-$categoria = isset($_REQUEST["categoria"]) ? $_REQUEST["categoria"] : '';
-$servicio = isset($_REQUEST["servicio"]) ? $_REQUEST["servicio"] : '';
-$dniEmpleado = isset($_REQUEST["empleado"]) ? $_REQUEST["empleado"] : '';
-$fecha = isset($_REQUEST["fecha_seleccionada"]) ? $_REQUEST["fecha_seleccionada"] : '';
-$hora = isset($_REQUEST["hora_seleccionada"]) ? $_REQUEST["hora_seleccionada"] : '';
+$servicio = $_POST["servicio"];
+$precio = $_POST["precio"];
+$fecha = $_POST["fecha"];
+$hora = $_POST["hora"];
 $dni = $_SESSION["dni"];
 
-try {
-    $con = new Conexion();
-    $conexion = $con->conectar_db();
-
-    // Consultar si ya hay una reserva para el cliente en la hora y fecha seleccionadas
-    $stmtReserva = $conexion->prepare("SELECT * FROM citas WHERE codCliente = :codCliente AND fecha = :fecha AND hora = :hora AND activo = 1");
-    $stmtReserva->bindParam(':codCliente', $dni, PDO::PARAM_STR);
-    $stmtReserva->bindParam(':fecha', $fecha, PDO::PARAM_STR);
-    $stmtReserva->bindParam(':hora', $hora, PDO::PARAM_STR);
-    $stmtReserva->execute();
-    $reserva_existente = $stmtReserva->fetch(PDO::FETCH_ASSOC);
-
-    if ($reserva_existente) {
-        // Si hay una reserva existente, mostrar una alerta y redirigir a reservarCita.php
-        echo '<script>alert("Ya tienes una reserva para esta fecha y hora.");</script>';
-        echo '<script>window.location.href = "reservarCita.php";</script>';
-        exit();
-    }
-} catch (PDOException $e) {
-    echo "Error al consultar la reserva: " . $e->getMessage();
-}
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +22,31 @@ try {
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+      .StripeElement {
+        background-color: white;
+        height: 40px;
+        padding: 10px 12px;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        box-shadow: 0 1px 3px 0 #e6ebf1;
+        -webkit-transition: box-shadow 150ms ease;
+        transition: box-shadow 150ms ease;
+      }
+
+      .StripeElement--focus {
+        box-shadow: 0 1px 3px 0 #cfd7df;
+      }
+
+      .StripeElement--invalid {
+        border-color: #fa755a;
+      }
+
+      .StripeElement--webkit-autofill {
+        background-color: #fefde5 !important;
+      }
+    </style>
 </head>
 <body>
     <div class="preloader">
@@ -129,78 +129,50 @@ try {
         </header>
 
         <?php
-        try {
-            $con = new Conexion();
-            $conexion = $con->conectar_db();
-
-            $stmtServicio = $conexion->prepare("SELECT * FROM servicios WHERE codigo = :codigo");
-            $stmtServicio->bindParam(':codigo', $servicio, PDO::PARAM_STR);
-            $stmtServicio->execute();
-            $resServicio = $stmtServicio->fetch(PDO::FETCH_OBJ);
-
-            $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
-            $stmt->bindParam(':dni', $dniEmpleado, PDO::PARAM_STR);
-            $stmt->execute();
-            $res = $stmt->fetch(PDO::FETCH_OBJ);
-
-            if ($resServicio) {
+      
         ?>
         <section class="section section-lg bg-gray-1 contacto-login" id="contacts">
             <div class="container">
                 <div class="row justify-content-center justify-content-lg-center row-2-columns-bordered row-50">
                     <div class="col-md-10 col-lg-8">
-                        <h2 class="text-center text-sm-start">Detalle de la cita</h2>
+                        <h2 class="text-center text-sm-start mb-4">Pago de la reserva</h2>
 
-                        <div class="table-responsive">
-                            <table class="table">
-                               
-                                <tr>
-                                    <th>Servicio Seleccionado</th>
-                                    <td><?php echo $resServicio->nombre; ?></td>
-                                </tr>
-                                <tr>
-                                    <th>Precio del servicio</th>
-                                    <td><?php echo $resServicio->precio; ?> .-€</td>
-                                </tr>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <td><?php echo $fecha; ?></td>
-                                </tr>
-                                <tr>
-                                    <th>Hora</th>
-                                    <td><?php echo $hora; ?></td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <!-- Formulario para enviar los datos a realizarReserva.php -->
-                        <form action="pago.php" method="post">
-                            <input type="hidden" name="dniempleado" value="<?php echo $dniEmpleado; ?>">
+                        <form action="CreateCharge.php" method="post" id="payment-form">
+                            <div class="form-wrap rd-form-2-2">
+                                <input class="form-input" id="dni" type="text" name="dni" value="<?php echo $dni; ?>" readonly>
+                                <label class="form-label" for="dni">DNI</label>
+                            </div>
+                            <div class="form-wrap rd-form-2-2">
+                                <input class="form-input" id="precio" type="number" name="precio" value="<?php echo $precio; ?>" readonly>
+                            </div>
                             <input type="hidden" name="servicio" value="<?php echo $servicio; ?>">
                             <input type="hidden" name="fecha" value="<?php echo $fecha; ?>">
                             <input type="hidden" name="hora" value="<?php echo $hora; ?>">
-                            <input type="hidden" name="precio" value="<?php echo $resServicio->precio; ?>">
-                            
-                            
-                            <div class="col-12 col-lg-10">
+                            <div class="form-wrap rd-form-2-2 mt-4">
+                                
+                                <div  id="card-element">
+                                <!-- A Stripe Element will be inserted here. -->
+                                </div>
+
+                                <!-- Used to display form errors. -->
+                                <div id="card-errors" role="alert"></div>
+                            </div>
+
+                            <div class="col-12 col-sm-9 col-lg-10">
                                  <!-- Se ocupa la mitad del ancho en escritorio y tablet -->
-                                <button class="button button-third" type="submit">Pagar Ahora</button> 
-                                <?php echo "<a href='realizarReserva.php?servicio=" . $servicio . "&fecha=" . $fecha . "&hora=" . $hora . "&precio=" . $resServicio->precio . "'><button class='button button-third' type='submit'>Pagar en Salón</button></a>";?>
+                                <button class="button button-third" type="submit">Pagar</button> 
                                 <a href="reservarCita.php"><button class="button button-third" type="submit">Volver</button></a>
                             </div>
                         </form>
+
+                       
 
                         
                     </div>
                 </div>
             </div>
         </section>
-        <?php
-            }
-        } catch (PDOException $e) {
-            echo "Error al recuperar datos: " . $e->getMessage();
-        }
-        ?>
+      
         <footer class="section footer-minimal context-dark">
             <div class="container wow-outer">
             <div class="wow fadeIn">
@@ -230,16 +202,82 @@ try {
         </div>
         <div class="snackbars" id="form-output-global"></div>
         <script src="js/core.min.js"></script>
-        <script src="js/script.js">
-      
+        <script src="js/script.js"></script>
+        <script>
+            // Create a Stripe client.
+            var stripe = Stripe('pk_test_51PLkGgP6f9KZ5XtHGI0mZCEZ7EufqRT5oLDFp7raIQMPeyaAnyJKujUj73ZQ2SNIdf46tAGmOZKMnegGpVfmGChV001Sp1KKFj');
+
+            // Create an instance of Elements.
+            var elements = stripe.elements();
+
+            // Custom styling can be passed to options when creating an Element.
+            // (Note that this demo uses a wider set of styles than the guide below.)
+            var style = {
+                base: {
+                color: '#32325d',
+                lineHeight: '18px',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+                },
+                invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+                }
+            };
+
+            // Create an instance of the card Element.
+            var card = elements.create('card', {style: style});
+
+            // Add an instance of the card Element into the `card-element` <div>.
+            card.mount('#card-element');
+
+            // Handle real-time validation errors from the card Element.
+            card.addEventListener('change', function(event) {
+                var displayError = document.getElementById('card-errors');
+                if (event.error) {
+                displayError.textContent = event.error.message;
+                } else {
+                displayError.textContent = '';
+                }
+            });
+
+            // Handle form submission.
+            var form = document.getElementById('payment-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                }
+                });
+            });
+
+            function stripeTokenHandler(token) {
+                // Insert the token ID into the form so it gets submitted to the server
+                var form = document.getElementById('payment-form');
+                var hiddenInput = document.createElement('input');
+                hiddenInput.setAttribute('type', 'hidden');
+                hiddenInput.setAttribute('name', 'stripeToken');
+                hiddenInput.setAttribute('value', token.id);
+                form.appendChild(hiddenInput);
+
+                // Submit the form
+                form.submit();
+            }
         </script>
+            
+            
     </body>
     </html>
 
-<?php
-} else {
 
-    header("Location: login.php");
-
-}
-?>
