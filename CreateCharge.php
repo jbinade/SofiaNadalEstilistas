@@ -26,5 +26,5 @@ $precioEnCentimos = intval($precio * 100);
     "source" => $token
   ]);
 
-  header("Location: realizarReserva.php?fecha=$fecha&servicio=$servicio&hora=$hora&preco=$precio&pagado=$pagado");
+  header("Location: realizarReserva.php?fecha=$fecha&servicio=$servicio&hora=$hora&precio=$precio&pagado=$pagado");
 ?>
