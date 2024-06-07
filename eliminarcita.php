@@ -2,11 +2,7 @@
 
 include("seguridad.php");
 
-$rol = $_SESSION["rol"];
 
-if ($rol == "usuario") {
-    header("Location: index.php");
-}
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

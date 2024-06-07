@@ -352,7 +352,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $stmtCliente->bindParam(':contrasena', $hashcontrasena, PDO::PARAM_STR);
                         $stmtCliente->execute();
 
-                        header("Location: index.php?registro=OK");
+                        echo "<script>alert('Registro realizado correctamente. Inicie Sesión.');</script>";
+                        echo '<script>window.location.href = "login.php";</script>';
+
+                        //header("Location: index.php?registro=OK");
 
                     } else {
                         $stmtRegistro = $conexion->prepare(
@@ -367,7 +370,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                         $stmtRegistro->execute();
 
-                        header("Location: index.php?registro=OK");
+                        echo "<script>alert('Registro realizado correctamente. Inicie Sesión.');</script>";
+                        echo '<script>window.location.href = "login.php";</script>';
+
+                        //header("Location: index.php?registro=OK");
 
                     }
 

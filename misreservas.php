@@ -99,7 +99,9 @@ if ($rol == "usuario") {
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Hora</th>
                                 <th scope="col">Servicio</th>
-                                <th scope="col">precio</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Pagado</th>
+                                <th scope="col">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -141,7 +143,8 @@ if ($rol == "usuario") {
                                         echo "<td>" . $resServicio->nombre . "</td>";
                                     }
                                     echo "<td>" . $res->total . ".-€" . "</td>";
-                                    echo "<td>" . $res->pagado . ".-€" . "</td>";
+                                    echo "<td>" . $res->pagado . "</td>";
+                                    echo "<td><a href='eliminarcita.php?idCita=" . $res->idCita . "'><img class='imagen-tabla' src='./images/borrar.jpg' alt='Borrar'></a></td>";
                                     echo "</tr>";
                                 }
                     
@@ -320,7 +323,8 @@ if ($rol == "usuario") {
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Hora</th>
                                 <th scope="col">Servicio</th>
-                                <th scope="col">precio</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Pagado</th>
                                 <th scope="col">Editar Estado</th>
                                 <th scope="col">Eliminar</th>
                             </tr>
@@ -364,7 +368,7 @@ if ($rol == "usuario") {
                                         echo "<td>" . $resServicio->nombre . "</td>";
                                     }
                                     echo "<td>" . $res->total . ".-€" . "</td>";
-                                    echo "<td>" . $res->pagado . ".-€" . "</td>";
+                                    echo "<td>" . $res->pagado . "</td>";
                                     echo "<td><a href='estadocita.php?idCita=" . $res->idCita . "'><img class='imagen-tabla' src='./images/editar.png' alt='Editar'></a></td>";
                                     echo "<td><a href='eliminarcita.php?idCita=" . $res->idCita . "'><img class='imagen-tabla' src='./images/borrar.jpg' alt='Borrar'></a></td>";
                                     echo "</tr>";

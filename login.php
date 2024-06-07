@@ -98,11 +98,11 @@
               <!-- RD Mailform-->
                 <form class="form-login" method="post" action="conexion.php">
                         <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="email" type="email" name="email" data-constraints="@Email @Required">
+                            <input class="form-input" id="email" type="email" name="email" required>
                             <label class="form-label" for="email">Email</label>
                             </div>
                             <div class="form-wrap rd-form-2-2">
-                            <input class="form-input" id="contrasena" type="password" name="contrasena" data-constraints="@Required">
+                            <input class="form-input" id="contrasena" type="password" name="contrasena" required>
                             <label class="form-label" for="contrasena">Contraseña</label>
                             </div>
                         

@@ -25,6 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
         $stmt->execute();
 
+        $stmtReservas = $conexion->prepare('UPDATE citas SET activo = 0 WHERE codCliente = :codCliente');
+        $stmtReservas->bindParam(':codCliente', $dni, PDO::PARAM_STR);
+        $stmtReservas->execute();
+
         header("Location: salir.php");
         
     } catch(PDOException $e) {
