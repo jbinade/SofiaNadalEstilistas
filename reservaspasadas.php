@@ -123,7 +123,7 @@ if ($rol == "usuario") {
                                 $num_total_registros = $stmt->rowCount();
                                 $total_paginas = ceil($num_total_registros / $PAGS);
 
-                                $stmt = $conexion->prepare("SELECT * FROM citas WHERE codCliente = :codCliente AND estado = 'realizada' LIMIT ".$inicio."," .$PAGS);
+                                $stmt = $conexion->prepare("SELECT * FROM citas WHERE codCliente = :codCliente AND activo = 1 AND estado = 'realizada' LIMIT ".$inicio."," .$PAGS);
                                 $stmt->bindParam(':codCliente', $dni, PDO::PARAM_STR);
                                 $stmt->execute();
                                 
@@ -342,7 +342,7 @@ if ($rol == "usuario") {
                                 $num_total_registros = $stmt->rowCount();
                                 $total_paginas = ceil($num_total_registros / $PAGS);
 
-                                $stmt = $conexion->prepare("SELECT * FROM citas WHERE estado = 'realizada' LIMIT ".$inicio."," .$PAGS);
+                                $stmt = $conexion->prepare("SELECT * FROM citas WHERE activo = 1 AND estado = 'realizada' LIMIT ".$inicio."," .$PAGS);
                                 $stmt->execute();
                                 
                                 while ($res = $stmt->fetch(PDO::FETCH_OBJ)) {

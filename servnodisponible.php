@@ -184,7 +184,7 @@ try {
                               echo $pagina . " ";
                           } else {
                               // Si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página
-                              echo "<a href='empleados.php?pagina=$i'>$i</a> ";
+                              echo "<a href='servicios.php?pagina=$i'>$i</a> ";
                           }
                       }
                     }
