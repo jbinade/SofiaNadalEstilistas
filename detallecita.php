@@ -1,5 +1,5 @@
 <?php
-include("seguridad.php");
+
 if (isset($_SESSION["rol"])) {
 
 include("conectar_db.php");
